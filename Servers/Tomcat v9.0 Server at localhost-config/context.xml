@@ -26,4 +26,9 @@
     <!--
     <Manager pathname="" />
     -->
+    <Resource name="jdbc/kbu_book" auth="Container"
+			type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver"
+			username="kbu_book" password="kbu_book"
+			url="jdbc:mysql://210.119.129.186:33306/kbu_book"
+			maxWait="5000" />
 </Context>

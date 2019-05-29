@@ -19,7 +19,7 @@ public class DBConnectionMgr {
     protected Connection getConnection() throws Exception {
         Context initCtx = new InitialContext();
         Context envCtx = (Context) initCtx.lookup("java:comp/env");
-        DataSource ds = (DataSource) envCtx.lookup("jdbc/jsp");
+        DataSource ds = (DataSource) envCtx.lookup("jdbc/kbu_book");
         return ds.getConnection();
     }
 }
