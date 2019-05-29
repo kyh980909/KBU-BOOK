@@ -23,12 +23,12 @@
                 <td><input name="title" class="form-control" type="text" placeholder="제목을 입력하세요" maxlength="50"></td>
             </tr>
             <tr>
-                <td><textarea name="content" class="form-control" type="text" placeholder="내용을 입력하세요"
+                <td><textarea name="content" class="form-control" placeholder="내용을 입력하세요"
                               style="resize: none; height: 600px" maxlength="2048"></textarea></td>
             </tr>
             </tbody>
         </table>
-        <input type="hidden" name="writer" value="admin">
+        <input type="hidden" name="writer" value="관리자">
         <input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
         <input type="submit" class="btn btn-success pull-right" value="글쓰기">
     </form>
