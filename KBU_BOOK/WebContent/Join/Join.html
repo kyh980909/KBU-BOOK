@@ -1,0 +1,112 @@
+<!doctype html>
+<style>
+@import "../css/style.css";
+</style>
+<link href="css/bootstrap-4.0.0.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function post_check()
+{
+  
+ //HTML의 form name="boardWriteForm"
+ //유효성체크하고 싶은 값의 id, name="content_pwd", maxlength="16"
+ 
+ var pwd = document.getElementById("pwd").value;
+	
+  if(pwd.value.length<8) {
+    alert("비밀번호는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 8~16자를 입력해주세요.");
+    return false;
+  }
+  
+  if(!pwd.value.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/)) {
+      alert("비밀번호는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 8~16자를 입력해주세요.");
+    return false;
+  }
+ 
+  return true;
+}
+	
+ function getTypeCheck(s, spc) {
+        var i;
+        
+        for (i = 0; i < s.length; i++) {
+            if (spc.indexOf(s.substring(i, i + 1)) < 0) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    function onlyNum(obj,n) {  //학번 입력 조건
+        var re = /[^0-9]/gi;
+        var NUM = "0123456789";
+        var str_space = /\s/;
+     
+        if(n == undefined || n == null) {
+            var n = "";
+            var n2 = "";
+        } 
+        else {
+            if(n == "") {
+                var n = "";
+                var n2 = "";
+            } 
+            else {
+                var n = eval(n);
+                var n2 = n;
+            }
+        }
+     
+        if(!getTypeCheck(obj.value, NUM)) {
+            alert("학번은 숫자만 입력 가능 합니다!");
+            
+            obj.value = obj.value.replace(re,"");
+            obj.value = n2;
+            
+            obj.focus();
+            
+            return false;
+        }
+    }
+    function check_id(inputid) { //id중복 확인
+    if(inputid.id.value ==""){
+        alert("아이디를 입력하세요! (error:1)");
+        return;
+    }
+    url="id_check.jsp?id="+inputid.id.value;
+    open(url, "id_check","toolbar=no, location=center, status=no, scrollbars=yes, resizable=no, with=400, height=300");
+    }
+
+</script>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" />
+
+<form action ="/Join/Signup_Join.jsp" name="form" method="post" onsubmit="" onreset="">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KBUBook join</title>
+  </head>
+	
+	<div id="main">
+	<p align="center"><img src="../img/회원가입.png" alt="" align="center"/>
+	<hr class="hr"></hr>
+	
+ <fieldset><p align="center">학번: <input type="text" placeholder="학번을 입력해주세요!" onKeyUp="onlyNum(this, '');" onChange="onlyNum(this, '');" class="text-form" name="std_id" required> <input type="button" value="학번확인" > </p></fieldset>
+    <!--name="" 값만 DB에서 읽을수 있다. -->
+
+<p>아이디: <input type="text" size="50" value="" placeholder="아이디 입력후 중복확인을 해주세요." name="id" class="text-form" required> <input type="button" value="중복확인" onclick="check_id(this.form)"> </p>
+<p>비밀번호: <input type="password" size="50" value="" minlength="3" placeholder="사용할 비밀번호를 정확히 입력하시오요." name="pwd" class="text-form" required></p>
+<p>학교이메일: <input type="text" value=""  name="email" class="text-form" required>@<select name="email2">
+	<option selected>bible.ac.kr</option>
+	<option>stu.bible.ac.kr</option>
+	</select></p>
+  <p>휴대전화번호: 	<input type="tel" id="phone" name="phone" class="text-form" required> </p>
+<p align="center"><input type="button" value="Home" onClick="location.href='../index.jsp'"> <input type="reset" value="다시 쓰기"> <input type="submit" value="회원가입" > </p>
+</p>
+</form>
+</body>
+</html>
