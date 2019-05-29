@@ -28,7 +28,7 @@ public class FreeTalkDAO {
         try {
             con = pool.getConnection();
 
-            sql = "select * from freetalk";
+            sql = "select * from freetalk order by id desc";
             pstmt = con.prepareStatement(sql);
 
             rs = pstmt.executeQuery();
@@ -184,7 +184,7 @@ public class FreeTalkDAO {
     }
 
     // 게시물 리턴
-    public FreeTalk getBoard(int num) {
+    public FreeTalk getContent(int num) {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
