@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import javax.servlet.http.HttpServletRequest;
 
 public class BoardMgr {
     private DBConnectionMgr pool;
@@ -111,31 +110,6 @@ public class BoardMgr {
         return totalCount;
     }
 
-    // 게시물 입력
-    public void insertBoard(HttpServletRequest req) {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String sql = null;
-        try {
-            con = pool.getConnection();
-            String content = req.getParameter("content");
-
-            sql = "insert freetalk(writer,content,title,date,count,ip) values(?, ?, ?, now(), 0, ?)";
-            pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, req.getParameter("writer"));
-            pstmt.setString(2, content);
-            pstmt.setString(3, req.getParameter("title"));
-            pstmt.setString(4, req.getParameter("ip"));
-            pstmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) try { rs.close(); } catch(SQLException ex) {}
-            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
-            if (con != null) try { con.close(); } catch(SQLException ex) {}
-        }
-    }
 
     // 게시물 리턴
     public FreeTalk getBoard(int num) {

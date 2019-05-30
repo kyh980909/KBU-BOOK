@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="java.lang.*" %>
 
 <% request.setCharacterEncoding("EUC-KR");
 	String id= (String)session.getAttribute("session_id");
 	String msg=request.getParameter("msg");
 	if(msg!= null && msg.equals("2")){
-		out.println("<script>alert('���̵� �Ǵ� ��й�ȣ�� Ȯ�� �Ͻʽÿ�!');</script>");
+		out.println("<script>alert('���̵� �Ǵ� ��й�ȣ�� Ȯ�� �Ͻʽÿ�!');</script>");
 
 	}
 %>
@@ -14,7 +13,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>KBUBook</title>
+<title>KBU BOOK</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/signin.css">
 </head>
@@ -24,12 +23,14 @@
 	</header>
 	<br>
 	<div class="container">
-		<form class="form-signin" method="post" name="Login" action="Loginpro.jsp">
-			<input class="form-control" type="text" placeholder="���̵� �Է��ϼ���!" name="id" required><br>
-			<input class="form-control" type="password" placeholder="��й�ȣ�� �Է��ϼ���!" name="pwd" required><br>
-			<input class="btn btn-lg btn-primary btn-block" type="submit" value="�α���" onclick="msg()">
-		<br><a href="Join/Join.html"><p align="center">ȸ������<a> ���̵�&��й�ȣ ã�� </a></p><br>
+		<form class="form-signin" method="post">
+			<input class="form-control" type="text" placeholder="아이디를 입력하세요!"><br>
+			<input class="form-control" type="password" placeholder="비밀번호를 입력하세요!"><br>
+			<input class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">
+		<br><a href="Join/join.jsp"><p align="center">회원가입<a> 아이디&비밀번호 찾기 </a></p><br>
+		</a>
 		</form>
+		<a href="FreeTalk/freeTalk.jsp">자유게시판</a>
 	</div>
 	<br>
 	<div class="text-center">
