@@ -18,7 +18,7 @@
     String email = request.getParameter("email"); /*학교이메일*/
     String email2 = request.getParameter("email2"); /*학교이멜2*/
     String tel = request.getParameter("phone_num"); /*전화번호*/
-    Timestamp join_date=new Timestamp(System.currentTimeMillis()); /*가입일*/
+    Timestamp join_date = new Timestamp(System.currentTimeMillis()); /*가입일*/
 
     Connection conn=null;
     PreparedStatement pstmt=null;
