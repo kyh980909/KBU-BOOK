@@ -1,5 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page import="java.lang.*" %>
+
+<% request.setCharacterEncoding("EUC-KR");
+	String id= (String)session.getAttribute("session_id");
+	String msg=request.getParameter("msg");
+	if(msg!= null && msg.equals("2")){
+		out.println("<script>alert('���̵� �Ǵ� ��й�ȣ�� Ȯ�� �Ͻʽÿ�!');</script>");
+
+	}
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,7 +18,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/signin.css">
 </head>
-<body>
+<body onload="document.Login.id.focus();">
 	<header class="text-center">
 		<h1><img src="img/Logo.png" width="1192" height="363" alt=""/></h1>
 	</header>
@@ -25,7 +35,7 @@
 	</div>
 	<br>
 	<div class="text-center">
-		
+
 	</div>
 </body>
 </html>
