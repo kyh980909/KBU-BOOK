@@ -17,56 +17,7 @@ public class FreeTalkDAO {
         }
     }
 
-    // 게시물 가져오기
-    public Vector<FreeTalk> getList() {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String sql = null;
-        Vector<FreeTalk> list = new Vector<FreeTalk>();
-
-        try {
-            con = pool.getConnection();
-
-            sql = "select * from freetalk order by id desc";
-            pstmt = con.prepareStatement(sql);
-
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                FreeTalk freeTalk = new FreeTalk();
-                freeTalk.setId(rs.getInt("id"));
-                freeTalk.setWriter(rs.getString("writer"));
-                freeTalk.setTitle(rs.getString("title"));
-                freeTalk.setDate(rs.getDate("date"));
-                freeTalk.setCount(rs.getInt("count"));
-                list.add(freeTalk);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ex) {}
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException ex) {}
-
-            }
-
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {}
-            }
-        }
-
-        return list;
-    }
-	
+	// 게시물 가져오기
 	public Vector<FreeTalk> getList(String keyField, String keyWord, int start, int end) {
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -235,7 +186,7 @@ public class FreeTalkDAO {
     }
 
     // 게시물 삭제
-    public void deleteBoard(int num) {
+    public void delete(int num) {
         Connection con = null;
         PreparedStatement pstmt = null;
         String sql = null;
@@ -256,7 +207,7 @@ public class FreeTalkDAO {
     }
 
     // 게시물 수정
-    public void updateBoard(FreeTalk freetalk) {
+    public void update(FreeTalk freetalk) {
         Connection con = null;
         PreparedStatement pstmt = null;
         String sql = null;

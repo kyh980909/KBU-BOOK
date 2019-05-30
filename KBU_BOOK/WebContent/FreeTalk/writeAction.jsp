@@ -14,15 +14,8 @@
     <jsp:setProperty name="freetalk" property="content" param="content"/>
     <jsp:setProperty name="freetalk" property="ip" param="ip"/>
 </jsp:useBean>
-<html>
-<head>
-    <title>KBU BOOK</title>
-</head>
-<body>
 <%
     FreeTalkDAO freeTalkDAO = new FreeTalkDAO();
     freeTalkDAO.write(freetalk.getTitle(), "관리자", freetalk.getContent(), freetalk.getIp());
     response.sendRedirect("freeTalk.jsp");
 %>
-</body>
-</html>

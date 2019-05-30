@@ -5,7 +5,7 @@
 	String id= (String)session.getAttribute("session_id");
 	String msg=request.getParameter("msg");
 	if(msg!= null && msg.equals("2")){
-		out.println("<script>alert('¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£¸¦ È®ÀÎ ÇÏ½Ê½Ã¿À!');</script>");
+		out.println("<script>alert('ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ï½Ê½Ã¿ï¿½!');</script>");
 
 	}
 %>
@@ -14,7 +14,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>KBUBook</title>
+<title>KBU BOOK</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/signin.css">
 </head>
@@ -24,12 +24,14 @@
 	</header>
 	<br>
 	<div class="container">
-		<form class="form-signin" method="post" name="Login" action="Loginpro.jsp">
-			<input class="form-control" type="text" placeholder="¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä!" name="id" required><br>
-			<input class="form-control" type="password" placeholder="ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä!" name="pwd" required><br>
-			<input class="btn btn-lg btn-primary btn-block" type="submit" value="·Î±×ÀÎ" onclick="msg()">
-		<br><a href="Join/Join.html"><p align="center">È¸¿ø°¡ÀÔ<a> ¾ÆÀÌµğ&ºñ¹Ğ¹øÈ£ Ã£±â </a></p><br>
+		<form class="form-signin" method="post">
+			<input class="form-control" type="text" placeholder="ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”!"><br>
+			<input class="form-control" type="password" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”!"><br>
+			<input class="btn btn-lg btn-primary btn-block" type="submit" value="ë¡œê·¸ì¸">
+		<br><a href="Join/join.jsp"><p align="center">íšŒì›ê°€ì…<a> ì•„ì´ë””&ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° </a></p><br>
+		</a>
 		</form>
+		<a href="FreeTalk/freeTalk.jsp">ììœ ê²Œì‹œíŒ</a>
 	</div>
 	<br>
 	<div class="text-center">

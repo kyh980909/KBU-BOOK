@@ -1,6 +1,4 @@
-<%@ page import="freetalk.FreeTalk" %>
-<%@ page import="freetalk.FreeTalkDAO" %>
-<%@ page import="java.io.PrintWriter" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: yongho
   Date: 2019-05-25
@@ -8,6 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="freetalk.FreeTalk" %>
+<%@ page import="freetalk.FreeTalkDAO" %>
+<jsp:useBean id="ftDAO" class="freetalk.FreeTalkDAO" />
+
+<%
+    int id = Integer.parseInt(request.getParameter("id"));  // 글 번호 가져오
+    ftDAO.upCount(id);   // 조회수 증가
+
+    FreeTalkDAO freeTalkDAO = new FreeTalkDAO();
+    FreeTalk freeTalk = ftDAO.getContent(id);
+    freeTalk = freeTalkDAO.getContent(id);
+
+    session.setAttribute("freeTalk", freeTalk);
+%>
+<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="../css/bootstrap.css">
@@ -24,25 +37,6 @@
             <col width="*"/>
         </colgroup>
         <tbody>
-        <%
-            FreeTalkDAO freeTalkDAO = new FreeTalkDAO();
-            FreeTalk freeTalk;
-
-            int id = 0;
-
-            if (request.getParameter("id") != null) {
-                id = Integer.parseInt(request.getParameter("id"));
-            }
-
-            if (id == 0) {
-                PrintWriter script = response.getWriter();
-                script.println("<script>");
-                script.println("alert('유효하지 않은 글 입니다.')");
-                script.println("</script>");
-                response.sendRedirect("freeTalk.jsp");
-            }
-            freeTalk = freeTalkDAO.getContent(id);
-        %>
         <tr>
             <td>제목</td>
             <td colspan="2" style="text-align: left"><%=freeTalk.getTitle()%>
@@ -51,6 +45,11 @@
         <tr>
             <td>작성자</td>
             <td style="text-align: left"><%=freeTalk.getWriter()%>
+            </td>
+        </tr>
+        <tr>
+            <td>조회수</td>
+            <td style="text-align: left"><%=freeTalk.getCount()%>
             </td>
         </tr>
         <tr>
@@ -65,7 +64,11 @@
         </tr>
         </tbody>
     </table>
-    <a href="freeTalk.jsp" class="btn btn-success pull-right">글목록</a>
+    <div class="pull-right">
+        <a href="freeTalk.jsp" class="btn btn-success">글목록</a>
+        <a href="update.jsp?id=<%=id%>" class="btn btn-primary">글수정</a>
+        <a href="delete.jsp?id=<%=id%>" class="btn btn-danger">글삭제</a>
+    </div>
 </div>
 </body>
 </html>
