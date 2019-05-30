@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.lang.*" %>
 
-<% request.setCharacterEncoding("EUC-KR");
+<% request.setCharacterEncoding("UTF-8");
 	String id= (String)session.getAttribute("session_id");
 	String msg=request.getParameter("msg");
 	if(msg!= null && msg.equals("2")){

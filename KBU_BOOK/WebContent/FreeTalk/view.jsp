@@ -7,16 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="freetalk.FreeTalk" %>
-<%@ page import="freetalk.FreeTalkDAO" %>
 <jsp:useBean id="ftDAO" class="freetalk.FreeTalkDAO" />
 
 <%
     int id = Integer.parseInt(request.getParameter("id"));  // 글 번호 가져오
     ftDAO.upCount(id);   // 조회수 증가
 
-    FreeTalkDAO freeTalkDAO = new FreeTalkDAO();
     FreeTalk freeTalk = ftDAO.getContent(id);
-    freeTalk = freeTalkDAO.getContent(id);
+
 
     session.setAttribute("freeTalk", freeTalk);
 %>
@@ -67,7 +65,7 @@
     <div class="pull-right">
         <a href="freeTalk.jsp" class="btn btn-success">글목록</a>
         <a href="update.jsp?id=<%=id%>" class="btn btn-primary">글수정</a>
-        <a href="delete.jsp?id=<%=id%>" class="btn btn-danger">글삭제</a>
+        <a href="delete.jsp?id=<%=id%>" class="btn btn-danger" onclick="return confirm('글을 삭제하시겠습니까?')">글삭제</a>
     </div>
 </div>
 </body>
