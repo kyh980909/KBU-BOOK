@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>KBUBook</title>
+<title>KBU BOOK</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/signin.css">
 </head>
@@ -18,8 +18,10 @@
 			<input class="form-control" type="text" placeholder="아이디를 입력하세요!"><br>
 			<input class="form-control" type="password" placeholder="비밀번호를 입력하세요!"><br>
 			<input class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">
-		<br><a href="Join/Join.html"><p align="center">회원가입<a> 아이디&비밀번호 찾기 </a></p><br>
+		<br><a href="Join/join.jsp"><p align="center">회원가입<a> 아이디&비밀번호 찾기 </a></p><br>
+		</a>
 		</form>
+		<a href="FreeTalk/freeTalk.jsp">자유게시판</a>
 	</div>
 	<br>
 	<div class="text-center">

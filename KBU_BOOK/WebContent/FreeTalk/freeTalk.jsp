@@ -57,6 +57,7 @@
     nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock);
     totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock);
 %>
+<jsp:include page="../top.jsp"/>
 <html>
 <head>
     <link rel="stylesheet" href="../css/bootstrap.css">
@@ -83,8 +84,6 @@
     </script>
 </head>
 <body>
-<h1 class="text-center">KBU BOOK</h1>
-<hr>
 <div style="margin: 0 50px 0 50px">
     <table style="align: center; width: 960px;">
         <tr>
@@ -103,6 +102,13 @@
     } else {
     %>
     <table class="table table-hover">
+        <colgroup>
+            <col width="10%"/>
+            <col width="*"/>
+            <col width="20%"/>
+            <col width="15%"/>
+            <col width="10%"/>
+        </colgroup>
         <thead>
         <tr>
             <td align="center">번 호</td>
@@ -115,7 +121,7 @@
         <tbody>
         <%
             for (int i = 0; i < listSize; i++) {
-                int num = list.get(i).getId();
+                int id = list.get(i).getId();
                 String writer = list.get(i).getWriter();
                 String title = list.get(i).getTitle();
                 Date date = list.get(i).getDate();
@@ -124,7 +130,7 @@
         <tr>
             <td align="center"><%=totalRecord - ((nowPage - 1) * numPerPage) - i%>
             </td>
-            <td><a href="view.jsp?id=<%=num%>"><%=title%>
+            <td><a href="view.jsp?id=<%=id%>"><%=title%>
             </a></td>
             <td align="center"><%=writer%>
             </td>
@@ -137,7 +143,7 @@
         </tbody>
     </table>
     <%}%>
-    <a href="write.jsp" class="btn btn-success pull-right">글쓰기</a>
+    <div class="text-center">
     <%
         int pageStart = (nowBlock - 1) * pagePerBlock + 1; //하단 페이지 시작번호
         int pageEnd = ((pageStart + pagePerBlock) <= totalPage) ? (pageStart + pagePerBlock) : totalPage + 1; //하단 페이지 끝번호
@@ -153,6 +159,8 @@
     <%if (totalBlock > nowBlock) {%>
     <a href="javascript:block('<%=nowBlock+1%>')">.....next</a> <%}%>&nbsp;
     <%}%>
+    </div>
+    <a href="write.jsp" class="btn btn-success pull-right">글쓰기</a>
 </div>
 <form name="readFrm" method="get">
     <input type="hidden" name="num">
