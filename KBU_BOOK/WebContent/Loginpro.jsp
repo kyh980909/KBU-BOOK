@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=EUC-KR" pageEncoding="EUC-KR" language="java" %>
-<%@ page import="member.memberDAO" %>
+<%@ page import="kbu.memberDAO" %>
 <% request.setCharacterEncoding("EUC-KR"); %>
 <html>
 <head>
