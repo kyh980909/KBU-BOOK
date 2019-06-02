@@ -10,12 +10,14 @@ import java.sql.SQLException;*/
 public class memberDAO { //DB연결
     private DBConnectionMgr pool = null;
     private static memberDAO instance;
-   // private memberDAO(){}
-    public static memberDAO getInstance(){
-        if(instance ==  null)
+
+    // private memberDAO(){}
+    public static memberDAO getInstance() {
+        if (instance == null)
             instance = new memberDAO();
         return instance;
     }
+
     public memberDAO() {
         try {
             pool = DBConnectionMgr.getInstance();
@@ -59,20 +61,20 @@ public class memberDAO { //DB연결
 
     }
 
-    public int checklogin(String id, String pwd){ //로그인 메서드
+    public int checklogin(String id, String pwd) { //로그인 메서드
 
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         int flage = -1;
-        String dbpwd=""; //DB에 저장된 비밀번호 저장
-        try{
+        String dbpwd = ""; //DB에 저장된 비밀번호 저장
+        try {
             // 쿼리 - 먼저 입력된 아이디로 DB에서 비밀번호를 조회한다.
             StringBuffer query = new StringBuffer();
             //pstmt=con.prepareStatement("select pwd from member where id = ?");
             query.append(" SELECT pwd FROM member WHERE id=?");
 
-            con = pool.getConnection();
+            con = pool.getConnection(); //커넥션 연결
             pstmt = con.prepareStatement(query.toString());
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
@@ -82,12 +84,12 @@ public class memberDAO { //DB연결
                 dbpwd = rs.getString("pwd"); // 비번을 변수에 넣는다.
 
                 if (dbpwd.equals(pwd))
-                    flage= 1; // 넘겨받은 비번과 꺼내온 배번 비교. 같으면 인증성공
+                    flage = 1; // 넘겨받은 비번과 꺼내온 배번 비교. 같으면 인증성공
                 else
                     flage = 2; // DB의 비밀번호와 입력받은 비밀번호 다름, 인증실패
 
             } else {
-                flage = 3; // 아디가 없을 경우
+                flage = 3; // 아이디가 없을 경우
             }
 
             return flage;
@@ -95,12 +97,64 @@ public class memberDAO { //DB연결
         } catch (Exception e1) {
             throw new RuntimeException(e1.getMessage());
         } finally {
-            try{
-                if ( pstmt != null ){ pstmt.close(); pstmt=null; }
-                if ( con != null ){ con.close(); con=null;    }
-            }catch(Exception e){
-                System.out.println("에러(lognin2): "+e);
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                    pstmt = null;
+                }
+                if (con != null) {
+                    con.close();
+                    con = null;
+                }
+            } catch (Exception e) {
+                System.out.println("에러(lognin2): " + e);
                 throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    public String search_id(String std_id, String email) throws Exception { //id찾기 메서드
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+
+        try {
+            con = pool.getConnection(); //커넥션 연결
+            pstmt = con.prepareStatement("select id from member where std_id = ? and email = ?");
+            pstmt.setString(1, std_id);
+            pstmt.setString(2, email);
+            rs = pstmt.executeQuery(); //객체에 결과값을 담을때 사용한다.
+            if (rs.next())
+                return (rs.getString("id"));
+            else
+                return null;
+        } finally {
+            if (rs != null) try {
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("에러(id찾기): "+ex);
+            }
+            if (pstmt != null) try {
+                pstmt.close();
+            } catch (SQLException ex) {
+                System.out.println("에러(id찾기2): "+ex);
+            }
+        }
+
+    }
+    public String se_id(String std_id, String id) throws Exception { //ID찾기 메서드 2
+        Connection con = null;
+        try {
+            con=pool.getConnection(); //커넥션 연결
+
+            String id2 =  search_id(std_id, id); //ID찾기 메서드1 의 데이터를 가져옴
+            return (id2);
+        } finally {
+            if(con != null) try {
+                con.close();
+            } catch (SQLException e){
+                System.out.println("i에러: "+e);
             }
         }
     }

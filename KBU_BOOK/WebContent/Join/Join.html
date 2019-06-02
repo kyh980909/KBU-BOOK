@@ -1,11 +1,16 @@
 <!doctype html>
+<link rel="stylesheet" href="../css/bootstrap.min.css"><!--부트스트랩 css를 불러옴-->
 <style>
 @import "../css/style.css";
-body{background-color: rgba(69, 255, 57, 0.06);}
+body{
+background-color: rgba(69, 255, 57, 0.06);
+background-position: center;
+background-repeat: no-repeat;
+background-size: auto;
+}
 </style>
-<link href="css/bootstrap-4.0.0.css" rel="stylesheet" type="text/css">
-<script type="text/javascript">
 
+<script type="text/javascript">
  function getTypeCheck(s, spc) {
         var i;
         
@@ -95,19 +100,16 @@ body{background-color: rgba(69, 255, 57, 0.06);}
     <p align="center"><img src="../img/Join.png" alt="" align="center"/></p>
 	<hr class="hr"></hr>
 
- <fieldset><p align="center">학번: <input type="text" placeholder="학번을 입력해주세요!" minlength="9" maxlength="9" onKeyUp="check_Num(this, '');" onChange="check_Num(this, '');" class="text-form" name="std_id" required> <input type="button" value="학번확인" > </p></fieldset>
+ <fieldset><p align="center">학번: <input type="text" placeholder="학번을 입력해주세요!" minlength="9" maxlength="9" onKeyUp="check_Num(this, '');" onChange="check_Num(this, '');" class="text-form" name="std_id" required> <input type="button" value="학번확인" class="btn btn-info" > </p></fieldset>
     <!--name="" 값만 DB에서 읽을수 있다. -->
 
-<p>아이디: <input type="text" size="50" value="" placeholder="아이디 입력후 중복확인을 해주세요." name="id" class="text-form" onkeydown="inputid_check()" required> <input type="button" value="중복확인" onclick="check_id(this.form)"> <input type="hidden" name="idcheck" value="idUncheck"></p>
+<p>아이디: <input type="text" size="50" value="" placeholder="아이디 입력후 중복확인을 해주세요." name="id" class="text-form" onkeydown="inputid_check()" required> <input type="button"  class="btn btn-info" value="중복확인" onclick="check_id(this.form)"> <input type="hidden" name="idcheck" value="idUncheck"></p>
 <p>비밀번호: <input type="password" size="50" value="" minlength="4" placeholder="사용할 비밀번호를 정확히 입력하시오." name="pwd" class="text-form" onkeyup="check_pwd(this)" onchange="check_pwd(this)" required></p>
-<p>학교이메일: <input type="text" value=""  name="email" class="text-form" required>@<select name="email2">
-	<option selected>bible.ac.kr</option>
-	<option>stu.bible.ac.kr</option>
-	</select></p>
-  <p>휴대전화번호: 	<input type="tel" name="phone_num" class="text-form" onchange="check_tel()"  required> </p>
-<p align="center"><input type="button" value="Home" onClick="location.href='../index.jsp'"> <input type="reset" value="다시 쓰기"> <input type="submit" value="회원가입" > </p>
+<p>학교이메일: <input type="text" name="email" class="text-form" required>@<select name="email2" class="text-form"><option selected>bible.ac.kr</option><option>stu.bible.ac.kr</option></select></p>
+<p>휴대전화번호: <input type="tel" name="phone_num" class="text-form" onchange="check_tel(this.form)"  required> </p>
+<p align="center"><input type="button" class="btn btn-success" value="집" onClick="location.href='../index.jsp'"> <input type="reset" value="다시 쓰기" class="btn btn-success"> <input type="submit" value="회원가입" class="btn btn-success" > </p>
 
-
+ <p align="center"> <b> &copy; 2019 Copyright by GwonSik Jo, WonJi Ha, YongHo Kim </b> </p>
 </form>
 </div>
 </body>
