@@ -13,7 +13,7 @@ public class DBConnectionMgr {
     public static DBConnectionMgr getInstance() {
         return instance;
     }
-    protected  Connection getConnection() throws Exception{ //JDNI
+    public Connection getConnection() throws Exception{ //JDNI
     Context ctx = new InitialContext();
     DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/kbubook");
         return ds.getConnection();

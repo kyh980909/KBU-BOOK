@@ -13,6 +13,10 @@
 <jsp:useBean id="freetalk" class="freetalk.FreeTalkDAO"/>
 
 <%
+    if (session.getAttribute("session_id") != null) {
+%>
+
+<%
     request.setCharacterEncoding("utf-8");
 
     int totalRecord = 0;
@@ -168,5 +172,9 @@
     <input type="hidden" name="keyField" value="<%=keyField%>">
     <input type="hidden" name="keyWord" value="<%=keyWord%>">
 </form>
+
+<%} else {
+        out.print("<script>alert('로그인을 해주세요.'); location.href='../index.jsp';</script>");
+}%>
 </body>
 </html>

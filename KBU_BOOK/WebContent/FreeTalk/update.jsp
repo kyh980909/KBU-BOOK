@@ -58,7 +58,7 @@
         <input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
         <div class="pull-right">
             <input type="button" class="btn btn-info" value="뒤로가기" onclick="history.go(-1)">
-            <input type="submit" class="btn btn-success" value="글수정">
+            <input type="submit" class="btn btn-success" value="글수정" onclick="return confirm('글을 수정하시겠습니까?')">
         </div>
     </form>
 </div>

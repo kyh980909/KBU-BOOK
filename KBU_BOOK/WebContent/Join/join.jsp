@@ -127,7 +127,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <p align="center"><img src="../img/회원가입.png" alt='이미지' align="center"/></p>
+        <p align="center"><img src="../img/Join.png" alt='이미지' align="center"/></p>
         <hr class="hr"></hr>
 
         <fieldset><p align="center">학번: <input type="text" placeholder="학번을 입력해주세요!" minlength="9" maxlength="9"

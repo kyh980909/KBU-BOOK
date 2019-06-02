@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <link rel="stylesheet" href="../css/bootstrap.css">
@@ -14,7 +15,6 @@
         function writeCheck() {
             var title = document.getElementById("title");
             var content = document.getElementById("content");
-            console.log(title.value);
 
             if (title.value.trim() === "") {
                 alert("글제목을 작성하세요");
@@ -45,7 +45,7 @@
             </tr>
             </tbody>
         </table>
-        <input type="hidden" name="writer" value="관리자">
+        <input type="hidden" name="writer" value=<%=session.getAttribute("session_id")%>>
         <input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
         <input type="submit" class="btn btn-success pull-right" value="글쓰기">
     </form>

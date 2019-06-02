@@ -22,13 +22,15 @@
     <title>KBU BOOK</title>
 </head>
 <body>
-<h1 class="text-center">KBU BOOK</h1>
+<header class="text-center">
+    <h1><img src="../img/Logo.png" width="300"></h1>
+</header>
 <br>
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="../index.jsp">홈<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../main.jsp">홈<span class="sr-only">(current)</span></a>
             </li>
             <li>
                 <a href="../FreeTalk/freeTalk.jsp">자유수다방</a>

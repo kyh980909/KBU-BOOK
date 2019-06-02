@@ -1,5 +1,8 @@
 package freetalk;
 
+
+import kbu.DBConnectionMgr;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 public class FreeTalkDAO {
-	private DBConnectionMgr pool;
+    private DBConnectionMgr pool;
 
     public FreeTalkDAO() {
         try {
