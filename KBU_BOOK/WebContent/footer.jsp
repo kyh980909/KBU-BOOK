@@ -7,9 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>KBUBook</title>
-</head>
 <body>
 <b> &copy; 2019 Copyright by GwonSik Jo, WonJi Ha, YongHo Kim </b>
 </body>

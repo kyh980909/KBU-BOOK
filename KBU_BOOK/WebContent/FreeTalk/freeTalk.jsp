@@ -66,6 +66,7 @@
 <head>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <title>KBU BOOK</title>
+
     <style type="text/css">
         a, a:hover {
             color: #000;
@@ -75,9 +76,7 @@
 
     <script type="text/javascript">
         function block(value) {
-            document.readFrm.nowPage.value =
-            <%=pagePerBlock%>*
-            (value - 1) + 1;
+            document.readFrm.nowPage.value = <%=pagePerBlock%>*(value - 1) + 1;
             document.readFrm.submit();
         }
 

@@ -2,12 +2,12 @@
   Created by IntelliJ IDEA.
   User: HWJ
   Date: 2019-06-01
-  Time: ���� 8:36
+  Time: 오후 8:36
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=EUC-KR" pageEncoding="EUC-KR" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <jsp:useBean id="memberDAO" class="kbu.memberDAO" />
-<% request.setCharacterEncoding("EUC-KR");%>
+<% request.setCharacterEncoding("UTF-8");%>
 
 <%  String std_id = request.getParameter("std_id");
     String email = request.getParameter("email");
@@ -24,14 +24,14 @@
 </head>
 <body>
 <div align="center">
-    <serach>���̵� & ��й�ȣ ã��</serach>
-    <hr></hr>
+    <serach>아이디 & 비밀번호 찾기</serach>
+    <hr>
 <% if(ID!= null){%>
-    <b><%=std_id%></b>���� ���̵�� <id> <%=ID%> </id>�Դϴ�! <b>��й�ȣ�� �����ڿ��� ���� �Ͻʽÿ�. </b>
-    <p><input type="button" value="�ݱ�" name="exit" onclick="window.close()"></p> <%} else
+    <b><%=std_id%></b>님의 아이디는 <id> <%=ID%> </id>입니다! <b>비밀번호는 관리자에게 문의 하십시오. </b>
+    <p><input type="button" value="닫기" name="exit" onclick="window.close()"></p> <%} else
     {%>
-    <b> <%= std_id%></b>���� �Ƶ��� �����ϴ�! �ٽ� ã�ų�, ȸ�������� �ϼ���.
-    <p><input type="button" value="���̵� �ٽ�ã��" name="re" onclick="history.back()"></p><%
+    <b> <%= std_id%></b>님의 아디디는 없습니다! 다시 찾거나, 회원가입을 하세요.
+    <p><input type="button" value="아이디 다시찾기" name="re" onclick="history.back()"></p><%
     } %>
 </body>
 </html>
