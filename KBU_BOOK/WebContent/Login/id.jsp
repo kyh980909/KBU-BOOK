@@ -1,13 +1,14 @@
-<%@ page import="kbu.memberDAO" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: HWJ
   Date: 2019-06-01
-  Time: ì˜¤í›„ 8:36
+  Time: ¿ÀÈÄ 8:36
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page import="kbu.memberDAO" %>
+<%@ page contentType="text/html;charset=EUC-KR" pageEncoding="EUC-KR" language="java" %>
 <jsp:useBean id="memberDAO" class="kbu.memberDAO" />
-<% request.setCharacterEncoding("UTF-8");%>
+<% request.setCharacterEncoding("EUC-KR");%>
 
 <%  String std_id = request.getParameter("std_id");
     String email = request.getParameter("email");
@@ -15,6 +16,8 @@
     String ID = dao.se_id(std_id, email);
     %>
 <html>
+<link rel="stylesheet" href="../css/bootstrap.min.css"><!--ºÎÆ®½ºÆ®·¦ css¸¦ ºÒ·¯¿È-->
+
 <style>
     @import "../css/style.css";
     body{background-color: rgba(243,206,90,0.53);}
@@ -24,14 +27,14 @@
 </head>
 <body>
 <div align="center">
-    <serach>ì•„ì´ë”” & ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</serach>
-    <hr>
+    <serach>¾ÆÀÌµð & ºñ¹Ð¹øÈ£ Ã£±â</serach>
+    <hr></hr>
 <% if(ID!= null){%>
-    <b><%=std_id%></b>ë‹˜ì˜ ì•„ì´ë””ëŠ” <id> <%=ID%> </id>ìž…ë‹ˆë‹¤! <b>ë¹„ë°€ë²ˆí˜¸ëŠ” ê´€ë¦¬ìžì—ê²Œ ë¬¸ì˜ í•˜ì‹­ì‹œì˜¤. </b>
-    <p><input type="button" value="ë‹«ê¸°" name="exit" onclick="window.close()"></p> <%} else
+    <b><%=std_id%></b>´ÔÀÇ ¾ÆÀÌµð´Â <id> <%=ID%> </id>ÀÔ´Ï´Ù! <b>ºñ¹Ð¹øÈ£´Â °ü¸®ÀÚ¿¡°Ô ¹®ÀÇ ÇÏ½Ê½Ã¿À. </b>
+    <p><input type="button" value="´Ý±â" name="exit" onclick="window.close()" class="btn btn-danger"></p> <%} else
     {%>
-    <b> <%= std_id%></b>ë‹˜ì˜ ì•„ë””ë””ëŠ” ì—†ìŠµë‹ˆë‹¤! ë‹¤ì‹œ ì°¾ê±°ë‚˜, íšŒì›ê°€ìž…ì„ í•˜ì„¸ìš”.
-    <p><input type="button" value="ì•„ì´ë”” ë‹¤ì‹œì°¾ê¸°" name="re" onclick="history.back()"></p><%
+    <b> <%= std_id%></b>´ÔÀÇ ¾Æµðµð´Â ¾ø½À´Ï´Ù! ´Ù½Ã Ã£°Å³ª, È¸¿ø°¡ÀÔÀ» ÇÏ¼¼¿ä.
+    <p><input type="button" value="¾ÆÀÌµð ´Ù½ÃÃ£±â" name="re" onclick="history.back()" class="btn btn-danger"></p><%
     } %>
 </body>
 </html>
