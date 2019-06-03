@@ -64,8 +64,10 @@
     </table>
     <div class="pull-right">
         <a href="freeTalk.jsp" class="btn btn-success">글목록</a>
+        <% if (freeTalk.getWriter().equals(session.getAttribute("id"))) { // 작성자와 로그인 한사람이 같을 경우 글수정, 글삭제 버튼 보이게 하기 %>
         <a href="update.jsp?id=<%=id%>" class="btn btn-primary">글수정</a>
         <a href="delete.jsp?id=<%=id%>" class="btn btn-danger" onclick="return confirm('글을 삭제하시겠습니까?')">글삭제</a>
+        <%}%>
     </div>
 </div>
 </body>

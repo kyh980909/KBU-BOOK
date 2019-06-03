@@ -28,7 +28,7 @@
     if(check == 1)    // 로그인 성공
     {
         // 세션에 현재 아이디 세팅
-        session.setAttribute("session_id", id);
+        session.setAttribute("id", id);
         url ="main.jsp";
     }
     else if(check == 2 || check == 3) // 아이디, 비밀번호가 맞지 않거나 없는 아이디를 입력하였을때

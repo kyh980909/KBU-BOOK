@@ -54,7 +54,7 @@
             </tr>
             </tbody>
         </table>
-        <input type="hidden" name="writer" value="관리자">
+        <input type="hidden" name="writer" value=<%=session.getAttribute("id")%>>
         <input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
         <div class="pull-right">
             <input type="button" class="btn btn-info" value="뒤로가기" onclick="history.go(-1)">

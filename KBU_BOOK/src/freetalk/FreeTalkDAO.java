@@ -230,4 +230,7 @@ public class FreeTalkDAO {
             if (con != null) try { con.close(); } catch(SQLException ex) {}
         }
     }
+
+
+
 }

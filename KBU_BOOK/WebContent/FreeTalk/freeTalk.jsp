@@ -13,7 +13,7 @@
 <jsp:useBean id="freetalk" class="freetalk.FreeTalkDAO"/>
 
 <%
-    if (session.getAttribute("session_id") != null) {
+    if (session.getAttribute("id") != null) {
 %>
 
 <%
@@ -23,7 +23,7 @@
     int numPerPage = 10;
     int pagePerBlock = 15;
 
-    int totalPage = 1;
+    int totalPage = 0;
     int totalBlock = 0;
 
     int nowPage = 1;
