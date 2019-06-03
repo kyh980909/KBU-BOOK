@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.lang.*" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <% request.setCharacterEncoding("UTF-8");
     String id= (String)session.getAttribute("session_id");
@@ -11,6 +10,9 @@
 %>
 
 <!DOCTYPE html>
+<style>
+@import "css/style.css";
+</style>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +30,8 @@
         <input class="form-control" type="text" name="id" placeholder="아이디를 입력하세요!"><br>
         <input class="form-control" type="password" name="pwd" placeholder="비밀번호를 입력하세요!"><br>
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">
-        <br><a href="Join/join.jsp"><p align="center">회원가입<a> 아이디&비밀번호 찾기 </a></p><br>
+        <br><a href="Join/join.jsp"><p align="center">회원가입<a href='Login/s_id.jsp' onclick="window.open(this.href,'IDã��','toolbar=no, location=center, status=no, resizable=no, width=800, height=200'); return false;"> ���̵�&��й�ȣ ã�� </a></p><br>
+	</a></p><br>
     </a>
     </form>
     <a href="FreeTalk/freeTalk.jsp">자유게시판</a>
@@ -36,5 +39,8 @@
 <br>
 <div class="text-center">
 </div>
+<p align="center">
+	<jsp:include page="Footer.jsp"/>
+</p>
 </body>
 </html>

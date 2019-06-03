@@ -17,7 +17,6 @@
 
 로그인성공<br>
 <%= session.getAttribute("id")%> 님 환영합니다!
-<a href="logoutProc.jsp" >로그아웃</a>
-
+<a href="Login/logoutProc.jsp" >로그아웃</a>
 </body>
 </html>
