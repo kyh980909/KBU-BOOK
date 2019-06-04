@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<body>
-<b> &copy; 2019 Copyright by GwonSik Jo, WonJi Ha, YongHo Kim </b>
-</body>
-</html>
+<b style="position:absolute;
+            bottom:0;
+            width:100%;
+            height:40px;
+            text-align: center;">&copy; 2019 Copyright by GwonSik Jo, WonJi Ha, YongHo Kim</b>
