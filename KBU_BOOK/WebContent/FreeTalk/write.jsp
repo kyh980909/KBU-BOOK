@@ -45,7 +45,7 @@
             </tr>
             </tbody>
         </table>
-        <input type="hidden" name="writer" value=<%=session.getAttribute("id")%>>
+        <input type="hidden" name="writer" value=<%=session.getAttribute("session_id")%>>
         <input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
         <input type="submit" class="btn btn-success pull-right" value="글쓰기">
     </form>

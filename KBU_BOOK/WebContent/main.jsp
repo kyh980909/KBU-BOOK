@@ -14,13 +14,10 @@
 </head>
 <body>
 <jsp:include page="top.jsp"/>
+<div class="text-center">
 로그인성공<br>
 <%= session.getAttribute("session_id")%> 님 환영합니다!
-
-<p align="center">
-    <jsp:include page="Footer.jsp"/>
-</p>
+</div>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>
-
-<!--<a href="Login/logoutProc.jsp" >로그아웃</a>-->

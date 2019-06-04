@@ -4,6 +4,7 @@ public class Daily {
     private int id;
     private String date;
     private String day;
+    private String food;
 
     public int getId() {
         return id;
@@ -36,6 +37,4 @@ public class Daily {
     public void setFood(String food) {
         this.food = food;
     }
-
-    private String food;
 }

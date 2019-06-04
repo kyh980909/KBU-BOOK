@@ -76,7 +76,9 @@
 
     <script type="text/javascript">
         function block(value) {
-            document.readFrm.nowPage.value = <%=pagePerBlock%>*(value - 1) + 1;
+            document.readFrm.nowPage.value =
+            <%=pagePerBlock%>*
+            (value - 1) + 1;
             document.readFrm.submit();
         }
 
@@ -88,7 +90,7 @@
 </head>
 <body>
 <div style="margin: 0 50px 0 50px">
-    <table style="align: center; width: 960px;">
+    <table style="width: 960px;">
         <tr>
             <td>Total : <%=totalRecord%> Articles( <font color="red"><%=nowPage%>/<%=totalPage%> Pages
             </font>)
@@ -147,21 +149,21 @@
     </table>
     <%}%>
     <div class="text-center">
-    <%
-        int pageStart = (nowBlock - 1) * pagePerBlock + 1; //하단 페이지 시작번호
-        int pageEnd = ((pageStart + pagePerBlock) <= totalPage) ? (pageStart + pagePerBlock) : totalPage + 1; //하단 페이지 끝번호
-        if (totalPage != 0) {
-            if (nowBlock > 1) {%>
-    <a href="javascript:block('<%=nowBlock-1%>')">prev...</a>
-    <%}%>&nbsp;
-    <% for (; pageStart < pageEnd; pageStart++) {%>
-    <a href="javascript:paging('<%=pageStart %>')"><%if (pageStart == nowPage) {%><font color="blue"><%}%>
-        [<%=pageStart %>]
-        <%if (pageStart == nowPage) {%></font> <%}%></a>
-    <%}//for%>&nbsp;
-    <%if (totalBlock > nowBlock) {%>
-    <a href="javascript:block('<%=nowBlock+1%>')">...next</a> <%}%>&nbsp;
-    <%}%>
+        <%
+            int pageStart = (nowBlock - 1) * pagePerBlock + 1; //하단 페이지 시작번호
+            int pageEnd = ((pageStart + pagePerBlock) <= totalPage) ? (pageStart + pagePerBlock) : totalPage + 1; //하단 페이지 끝번호
+            if (totalPage != 0) {
+                if (nowBlock > 1) {%>
+        <a href="javascript:block('<%=nowBlock-1%>')">prev...</a>
+        <%}%>&nbsp;
+        <% for (; pageStart < pageEnd; pageStart++) {%>
+        <a href="javascript:paging('<%=pageStart %>')"><%if (pageStart == nowPage) {%><font color="blue"><%}%>
+            [<%=pageStart %>]
+            <%if (pageStart == nowPage) {%></font> <%}%></a>
+        <%}//for%>&nbsp;
+        <%if (totalBlock > nowBlock) {%>
+        <a href="javascript:block('<%=nowBlock+1%>')">...next</a> <%}%>&nbsp;
+        <%}%>
     </div>
     <a href="write.jsp" class="btn btn-success pull-right">글쓰기</a>
 </div>
@@ -172,8 +174,12 @@
     <input type="hidden" name="keyWord" value="<%=keyWord%>">
 </form>
 
-<%} else {
+<%
+    } else {
         out.print("<script>alert('로그인을 해주세요.'); location.href='../index.jsp';</script>");
-}%>
+    }
+%>
+<br>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
