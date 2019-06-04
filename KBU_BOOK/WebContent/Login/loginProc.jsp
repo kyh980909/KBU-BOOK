@@ -33,7 +33,7 @@
     }
     else if(check == 2 || check == 3) // 아이디, 비밀번호가 맞지 않거나 없는 아이디를 입력하였을때
     {
-        url = "index.jsp?msg=2";
+        url = "../index.jsp?msg=2";
     }
     response.sendRedirect(url); // sendRedirect(String URL) : 해당 URL로 이동, URL뒤에 get방식 처럼 데이터를 전달가능
 %>

@@ -22,7 +22,7 @@
 </head>
 <body onload="document.Login.id.focus();">
 <header class="text-center">
-    <h1><img src="../img/Logo.png" width="300"></h1>
+    <h1><img src="../img/Logo.png" style="width: 500px;"></h1>
 </header>
 <br>
 <div class="container">
