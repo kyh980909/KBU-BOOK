@@ -38,7 +38,7 @@
 	<div class="text-center">
 	</div>
 <p align="center">
-	<jsp:include page="Footer.jsp"/>
+	<jsp:include page="footer.jsp"/>
 </p>
 </body>
 </html>
