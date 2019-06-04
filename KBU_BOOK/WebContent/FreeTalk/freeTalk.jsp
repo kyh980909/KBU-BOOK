@@ -13,7 +13,7 @@
 <jsp:useBean id="freetalk" class="freetalk.FreeTalkDAO"/>
 
 <%
-    if (session.getAttribute("id") != null) {
+    if (session.getAttribute("session_id") != null) {
 %>
 
 <%

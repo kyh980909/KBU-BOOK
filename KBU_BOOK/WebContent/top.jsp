@@ -47,12 +47,17 @@
             </li>
             <li><a href="#">묵상지</a></li>
             <li><a href="http://210.119.129.80:8080/SchoolFood/Menu.jsp">식단표</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">회원관리<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="../Join/join.jsp">회원가입</a></li>
-                    <li><a href="#">아이디/비밀번호찾기</a></li>
+        </ul> <!--식단표 메뉴까지 -->
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= session.getAttribute("session_id")%>님메뉴<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="Login/logoutProc.jsp">로그아웃</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">회원정보 수정</a></li>
                 </ul>
+
             </li>
         </ul>
     </div>
