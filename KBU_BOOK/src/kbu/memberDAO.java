@@ -117,7 +117,7 @@ public class memberDAO { //DB연결
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String sql = null;
+
 
         try {
             con = pool.getConnection(); //커넥션 연결
@@ -133,30 +133,81 @@ public class memberDAO { //DB연결
             if (rs != null) try {
                 rs.close();
             } catch (SQLException ex) {
-                System.out.println("에러(id찾기): "+ex);
+                System.out.println("에러(id찾기): " + ex);
             }
             if (pstmt != null) try {
                 pstmt.close();
             } catch (SQLException ex) {
-                System.out.println("에러(id찾기2): "+ex);
+                System.out.println("에러(id찾기2): " + ex);
             }
         }
-
     }
+
     public String se_id(String std_id, String id) throws Exception { //ID찾기 메서드 2
         Connection con = null;
         try {
-            con=pool.getConnection(); //커넥션 연결
+            con = pool.getConnection(); //커넥션 연결
 
-            String id2 =  search_id(std_id, id); //ID찾기 메서드1 의 데이터를 가져옴
+            String id2 = search_id(std_id, id); //ID찾기 메서드1 의 데이터를 가져옴
             return (id2);
         } finally {
-            if(con != null) try {
+            if (con != null) try {
                 con.close();
-            } catch (SQLException e){
-                System.out.println("i에러: "+e);
+            } catch (SQLException e) {
+                System.out.println("i에러: " + e);
             }
         }
     }
 
+
+    public String search_student(String std_id, String name, String grade, String department) throws Exception { // 학생 정보 찾기 메서드
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+
+        try {
+            con = pool.getConnection(); //커넥션 연결
+
+            pstmt = con.prepareStatement("select std_id from student where name1 = ? and grade = ? and department = ?");
+            rs = pstmt.executeQuery(); //객체에 결과값을 담을때 사용한다.
+
+            pstmt.setString(1, name);
+            pstmt.setString(2, grade);
+            pstmt.setString(3, department);
+            rs = pstmt.executeQuery(); //객체에 결과값을 담을때 사용한다.
+            rs.getString("name");
+            rs.getString("grade");
+            rs.getString("department");
+            if (rs.next()){
+               return (rs.getString("name"));
+                            }
+            if(rs.next()){
+                return (rs.getString("grade"));
+            }
+            if(rs.next()){
+                return (rs.getString("department"));
+            }
+            if(rs.next()){
+                return (rs.getString(std_id));
+            }
+            else
+                return null;
+        } finally {
+            if (rs != null) try {
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("에러(id찾기): " + ex);
+            }
+            if (pstmt != null) try {
+                pstmt.close();
+            } catch (SQLException ex) {
+                System.out.println("에러(id찾기2): " + ex);
+            }
+        }
+    }
+
+
+
 }
+
