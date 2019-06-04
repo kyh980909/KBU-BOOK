@@ -21,22 +21,23 @@
 <link rel="stylesheet" href="css/signin.css">
 </head>
 <body onload="document.Login.id.focus();">
-	<header class="text-center">
-		<h1><img src="img/Logo.png" width="1192" height="363" alt=""/></h1>
-	</header>
-	<br>
-	<div class="container">
-		<form class="form-signin" method="post" name="Login" action="Login/Loginpro.jsp">
-			<input class="form-control" type="text" placeholder="아이디를 입력하세요!" name="id" required><br>
-			<input class="form-control" type="password" placeholder="비밀번호를 입력하세요!" name="pwd" required><br>
-			<input class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">
-		<br><a href="Join/Join.html"><p align="center">회원가입<a href='Login/s_id.jsp' onclick="window.open(this.href,'ID찾기','toolbar=no, location=center, status=no, resizable=no, width=800, height=200'); return false;"> 아이디&비밀번호 찾기 </a></p><br>
-		</a>
-		</form>
-	</div>
-	<br>
-	<div class="text-center">
-	</div>
+<header class="text-center">
+    <h1><img src="../img/Logo.png" style="width: 500px;"></h1>
+</header>
+<br>
+<div class="container">
+    <form class="form-signin" method="post" name="Login" action="Login/loginProc.jsp">
+        <input class="form-control" type="text" name="id" placeholder="아이디를 입력하세요!"><br>
+        <input class="form-control" type="password" name="pwd" placeholder="비밀번호를 입력하세요!"><br>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">
+        <br><a href="Join/join.jsp"><p align="center">회원가입 <a href='Login/s_id.jsp' onclick="window.open(this.href,'ID찾기','toolbar=no, location=center, status=no, resizable=no, width=800, height=200'); return false;">아이디&비밀번호 찾기</a></p><br>
+	</a></p><br>
+    </a>
+    </form>
+</div>
+<br>
+<div class="text-center">
+</div>
 <p align="center">
 	<jsp:include page="Footer.jsp"/>
 </p>

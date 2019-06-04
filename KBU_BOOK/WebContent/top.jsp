@@ -30,7 +30,7 @@
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="../main.jsp">집<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../main.jsp">홈</a>
             </li>
             <li>
                 <a href="../FreeTalk/freeTalk.jsp">자유수다방</a>

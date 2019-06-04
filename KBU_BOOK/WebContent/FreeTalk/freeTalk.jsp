@@ -160,7 +160,7 @@
         <%if (pageStart == nowPage) {%></font> <%}%></a>
     <%}//for%>&nbsp;
     <%if (totalBlock > nowBlock) {%>
-    <a href="javascript:block('<%=nowBlock+1%>')">.....next</a> <%}%>&nbsp;
+    <a href="javascript:block('<%=nowBlock+1%>')">...next</a> <%}%>&nbsp;
     <%}%>
     </div>
     <a href="write.jsp" class="btn btn-success pull-right">글쓰기</a>
