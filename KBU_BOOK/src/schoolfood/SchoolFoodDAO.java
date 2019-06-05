@@ -1,17 +1,20 @@
 package schoolfood;
 
 import kbu.DBConnectionMgr;
+import util.UtilMgr;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Vector;
 
 public class SchoolFoodDAO {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); // 날짜 포
     private String today = sdf.format(System.currentTimeMillis()); // 오늘 날짜 문자열로 저장
+    private Calendar calendar = Calendar.getInstance(); // 오늘 날짜
 
     private DBConnectionMgr pool;
 
@@ -33,7 +36,7 @@ public class SchoolFoodDAO {
 
         try {
             con = pool.getConnection();
-            sql = "select * from lunch";
+            sql = "select * from lunch where date >= "+UtilMgr.getMonday() + " and date <= " + UtilMgr.getFriday();
 
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();
@@ -83,6 +86,9 @@ public class SchoolFoodDAO {
         String sql = null;
 
         Lunch lunch = new Lunch();
+
+        System.out.println("이번주 월요일 날짜:"+UtilMgr.getMonday());
+        System.out.println("이번주 금요일 날짜:"+UtilMgr.getFriday());
 
         try {
             con = pool.getConnection();
@@ -140,7 +146,7 @@ public class SchoolFoodDAO {
         try {
             con = pool.getConnection();
 
-            sql = "select * from dinner";
+            sql = "select * from dinner where date >= "+UtilMgr.getMonday() + " and date <= " + UtilMgr.getFriday();
 
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();
@@ -247,7 +253,7 @@ public class SchoolFoodDAO {
         try {
             con = pool.getConnection();
 
-            sql = "select * from fix";
+            sql = "select * from fix where date >= "+UtilMgr.getMonday() + " and date <= " + UtilMgr.getFriday();
 
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();
@@ -354,7 +360,7 @@ public class SchoolFoodDAO {
         try {
             con = pool.getConnection();
 
-            sql = "select * from daily";
+            sql = "select * from daily where date >= "+UtilMgr.getMonday() + " and date <= " + UtilMgr.getFriday();
 
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();

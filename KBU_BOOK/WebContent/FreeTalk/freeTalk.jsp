@@ -19,20 +19,20 @@
 <%
     request.setCharacterEncoding("utf-8");
 
-    int totalRecord = 0;
-    int numPerPage = 10;
-    int pagePerBlock = 15;
+    int totalRecord = 0; // 전체레코드 수
+    int numPerPage = 10; // 페이지당 레코드 수
+    int pagePerBlock = 15; // 블럭당 페이지 수
 
-    int totalPage = 0;
-    int totalBlock = 0;
+    int totalPage = 0; // 전체 페이지 수
+    int totalBlock = 0; // 전체 블럭 수
 
-    int nowPage = 1;
-    int nowBlock = 1;
+    int nowPage = 1; // 현재 페이지
+    int nowBlock = 1; // 햔재 블럭
 
-    int start = 0;
-    int end = 0;
+    int start = 0; // DB의 select 시작번호
+    int end = 0; // 시작번호로 부터 가져올 select 갯수
 
-    int listSize = 0;
+    int listSize = 0; // 햔재 읽어온 게시물의 수
 
     String keyWord = "", keyField = "";
     Vector<FreeTalk> list = null;
@@ -57,9 +57,9 @@
     end = numPerPage;
 
     totalRecord = freetalk.getTotalCount(keyField, keyWord);
-    totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
-    nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock);
-    totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock);
+    totalPage = (int) Math.ceil((double) totalRecord / numPerPage); // 전체페이지 수
+    nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock); // 현재블럭 계산
+    totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock); // 전체블럭 계산
 %>
 <jsp:include page="../top.jsp"/>
 <html>
@@ -68,7 +68,7 @@
     <title>KBU BOOK</title>
 
     <style type="text/css">
-        a, a:hover {
+        td > a, td > a:hover {
             color: #000;
             text-decoration-line: none;
         }
@@ -148,24 +148,39 @@
         </tbody>
     </table>
     <%}%>
+    <a href="write.jsp" class="btn btn-success pull-right">글쓰기</a>
+    <br>
     <div class="text-center">
         <%
             int pageStart = (nowBlock - 1) * pagePerBlock + 1; //하단 페이지 시작번호
             int pageEnd = ((pageStart + pagePerBlock) <= totalPage) ? (pageStart + pagePerBlock) : totalPage + 1; //하단 페이지 끝번호
             if (totalPage != 0) {
                 if (nowBlock > 1) {%>
-        <a href="javascript:block('<%=nowBlock-1%>')">prev...</a>
-        <%}%>&nbsp;
+        <ul class="pagination">
+            <li>
+                <a href="javascript:block('<%=nowBlock-1%>')">prev</a>
+            </li>
+        </ul>
+        <%}%>
+        <ul class="pagination">
         <% for (; pageStart < pageEnd; pageStart++) {%>
-        <a href="javascript:paging('<%=pageStart %>')"><%if (pageStart == nowPage) {%><font color="blue"><%}%>
-            [<%=pageStart %>]
-            <%if (pageStart == nowPage) {%></font> <%}%></a>
-        <%}//for%>&nbsp;
-        <%if (totalBlock > nowBlock) {%>
-        <a href="javascript:block('<%=nowBlock+1%>')">...next</a> <%}%>&nbsp;
+            <li>
+                <a href="javascript:paging('<%=pageStart%>')">
+                    <%if (pageStart == nowPage) {%><font color="red"><%}%>
+                    <%=pageStart%>
+                    <%if (pageStart == nowPage) {%></font><%}%></a>
+            </li>
+        <%}//for%>
+        </ul>
+        <% if (totalBlock > nowBlock) {%>
+        <ul class="pagination">
+            <li>
+                <a href="javascript:block('<%=nowBlock+1%>')">next</a>
+            </li>
+        </ul>
+        <%}%>&nbsp;
         <%}%>
     </div>
-    <a href="write.jsp" class="btn btn-success pull-right">글쓰기</a>
 </div>
 <form name="readFrm" method="get">
     <input type="hidden" name="num">

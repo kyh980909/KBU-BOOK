@@ -1,24 +1,23 @@
 package kbu;
 
 import java.sql.*;
-import java.util.*;
 /*
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;*/
 
-public class memberDAO { //DB연결
+public class MemberDAO { //DB연결
     private DBConnectionMgr pool = null;
-    private static memberDAO instance;
+    private static MemberDAO instance;
 
-    // private memberDAO(){}
-    public static memberDAO getInstance() {
+    // private MemberDAO(){}
+    public static MemberDAO getInstance() {
         if (instance == null)
-            instance = new memberDAO();
+            instance = new MemberDAO();
         return instance;
     }
 
-    public memberDAO() {
+    public MemberDAO() {
         try {
             pool = DBConnectionMgr.getInstance();
             System.out.println("DB연결 성공");
@@ -160,39 +159,27 @@ public class memberDAO { //DB연결
     }
 
 
-    public String search_student(String std_id, String name, String grade, String department) throws Exception { // 학생 정보 찾기 메서드
+    public Member search_student(String std_id) throws Exception { // 학생 정보 찾기 메서드
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
+        Member member = new Member();
 
         try {
             con = pool.getConnection(); //커넥션 연결
 
-            pstmt = con.prepareStatement("select std_id from student where name1 = ? and grade = ? and department = ?");
+            pstmt = con.prepareStatement("select * from student where std_id="+std_id);
+
             rs = pstmt.executeQuery(); //객체에 결과값을 담을때 사용한다.
 
-            pstmt.setString(1, name);
-            pstmt.setString(2, grade);
-            pstmt.setString(3, department);
-            rs = pstmt.executeQuery(); //객체에 결과값을 담을때 사용한다.
-            rs.getString("name");
-            rs.getString("grade");
-            rs.getString("department");
-            if (rs.next()){
-               return (rs.getString("name"));
-                            }
-            if(rs.next()){
-                return (rs.getString("grade"));
+            if (rs.next()) {
+                member.setName(rs.getString("name1"));
+                member.setGrade(rs.getString("grade"));
+                member.setDepartment(rs.getString("department"));
             }
-            if(rs.next()){
-                return (rs.getString("department"));
-            }
-            if(rs.next()){
-                return (rs.getString(std_id));
-            }
-            else
-                return null;
+
+            return member;
+
         } finally {
             if (rs != null) try {
                 rs.close();

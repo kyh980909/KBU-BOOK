@@ -29,3 +29,7 @@ table.schoolfood td {
     border-bottom: 1px solid #ccc;
     text-align: center;
 }
+
+#kind {
+    vertical-align: center;
+}

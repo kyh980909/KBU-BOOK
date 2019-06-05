@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" language="java" %>
-<jsp:useBean id="memberDAO" class="kbu.memberDAO" />
+<jsp:useBean id="memberDAO" class="kbu.MemberDAO" />
 <% request.setCharacterEncoding("EUC-KR");%>
 
 <%   String id = request.getParameter("id");

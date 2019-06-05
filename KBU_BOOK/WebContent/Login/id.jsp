@@ -5,14 +5,15 @@
   Time: ¿ÀÈÄ 8:36
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="kbu.memberDAO" %>
+<%@ page import="kbu.MemberDAO" %>
+<%@ page import="kbu.MemberDAO" %>
 <%@ page contentType="text/html;charset=EUC-KR" pageEncoding="EUC-KR" language="java" %>
-<jsp:useBean id="memberDAO" class="kbu.memberDAO" />
+<jsp:useBean id="memberDAO" class="kbu.MemberDAO" />
 <% request.setCharacterEncoding("EUC-KR");%>
 
 <%  String std_id = request.getParameter("std_id");
     String email = request.getParameter("email");
-    kbu.memberDAO dao = memberDAO.getInstance();
+    MemberDAO dao = memberDAO.getInstance();
     String ID = dao.se_id(std_id, email);
     %>
 <html>

@@ -10,13 +10,18 @@
 <%@ page import="schoolfood.Dinner" %>
 <%@ page import="schoolfood.Fix" %>
 <%@ page import="schoolfood.Lunch" %>
+<%@ page import="java.util.Vector" %>
+
+<%
+    if (session.getAttribute("session_id") != null) {
+%>
 
 <jsp:useBean id="foodDAO" class="schoolfood.SchoolFoodDAO"/>
 <%
-    Lunch lunchList = foodDAO.getTodayLunch();
-    Dinner dinnerList = foodDAO.getTodayDinner();
-    Fix fixList = foodDAO.getTodayFix();
-    Daily dailyList = foodDAO.getTodayDaily();
+    Vector<Lunch> lunchList = foodDAO.getLunch();
+    Vector<Dinner> dinnerList = foodDAO.getDinner();
+    Vector<Fix> fixList = foodDAO.getFix();
+    Vector<Daily> dailyList = foodDAO.getDaily();
 %>
 <jsp:include page="../top.jsp"/>
 
@@ -31,42 +36,57 @@
 <table class="schoolfood">
     <thead>
     <tr>
+        <% for (Lunch lunch : lunchList) { %>
         <td>
-            <%=lunchList.getDate()%>
-            <br>
-            <%=lunchList.getDay()%>
+            <%=lunch.getDate()%>
+            <%=lunch.getDay()%>
         </td>
+        <%}%>
     </tr>
     </thead>
     <tbody>
     <tr>
+        <% for (Lunch lunch : lunchList) { %>
         <td>
-            <% for (String lunch : lunchList.getFood()) { %>
-            <%=lunch%><br>
+            <%for (String food : lunch.getFood()) {%>
+            <%=food%><br>
             <%}%>
         </td>
+        <%}%>
     </tr>
     <tr>
+        <% for (Dinner dinner : dinnerList) { %>
         <td>
-            <% for (String dinner : dinnerList.getFood()) { %>
-            <%=dinner%><br>
+            <%for (String food : dinner.getFood()) {%>
+            <%=food%><br>
             <%}%>
         </td>
+        <%}%>
     </tr>
     <tr>
+        <% for (Fix fix : fixList) { %>
         <td>
-            <% for (String fix : fixList.getFood()) { %>
-            <%=fix%><br>
+            <%for (String food : fix.getFood()) {%>
+            <%=food%><br>
             <%}%>
         </td>
+        <%}%>
     </tr>
     <tr>
+        <% for (Daily daily : dailyList) { %>
         <td>
-            <%=dailyList.getFood()%><br>
+            <%=daily.getFood()%><br>
         </td>
+        <%}%>
     </tr>
     </tbody>
 </table>
+
+<%
+    } else {
+        out.print("<script>alert('로그인을 해주세요.'); location.href='../index.jsp';</script>");
+    }
+%>
 <br>
 <jsp:include page="../footer.jsp"/>
 </body>
