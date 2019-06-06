@@ -48,7 +48,6 @@
             <li><a href="#">묵상지</a></li>
             <li><a href="../SchoolFood/schoolFood.jsp">식단표</a></li>
         </ul> <!--식단표 메뉴까지 -->
-
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= session.getAttribute("session_id")%>님

@@ -13,9 +13,8 @@
     String std_id = request.getParameter("std_id");
     MemberDAO d = MemberDAO.getInstance();
 
-    Member member = new Member();
-    member = d.search_student(std_id);
-    
+    Member member = d.search_student(std_id);
+
 %>
 <html>
 <head>

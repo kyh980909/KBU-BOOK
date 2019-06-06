@@ -8,13 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Vector;
 
 public class SchoolFoodDAO {
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); // 날짜 포
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); // 날짜 포맷
     private String today = sdf.format(System.currentTimeMillis()); // 오늘 날짜 문자열로 저장
-    private Calendar calendar = Calendar.getInstance(); // 오늘 날짜
 
     private DBConnectionMgr pool;
 
@@ -86,9 +84,6 @@ public class SchoolFoodDAO {
         String sql = null;
 
         Lunch lunch = new Lunch();
-
-        System.out.println("이번주 월요일 날짜:"+UtilMgr.getMonday());
-        System.out.println("이번주 금요일 날짜:"+UtilMgr.getFriday());
 
         try {
             con = pool.getConnection();

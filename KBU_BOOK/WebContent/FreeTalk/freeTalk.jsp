@@ -163,14 +163,14 @@
         </ul>
         <%}%>
         <ul class="pagination">
-        <% for (; pageStart < pageEnd; pageStart++) {%>
+            <% for (; pageStart < pageEnd; pageStart++) {%>
             <li>
                 <a href="javascript:paging('<%=pageStart%>')">
                     <%if (pageStart == nowPage) {%><font color="red"><%}%>
                     <%=pageStart%>
                     <%if (pageStart == nowPage) {%></font><%}%></a>
             </li>
-        <%}//for%>
+            <%}//for%>
         </ul>
         <% if (totalBlock > nowBlock) {%>
         <ul class="pagination">
@@ -188,13 +188,12 @@
     <input type="hidden" name="keyField" value="<%=keyField%>">
     <input type="hidden" name="keyWord" value="<%=keyWord%>">
 </form>
-
+<br>
+<jsp:include page="../footer.jsp"/>
+</body>
+</html>
 <%
     } else {
         out.print("<script>alert('로그인을 해주세요.'); location.href='../index.jsp';</script>");
     }
 %>
-<br>
-<jsp:include page="../footer.jsp"/>
-</body>
-</html>

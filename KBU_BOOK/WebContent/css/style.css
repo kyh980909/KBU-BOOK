@@ -21,7 +21,7 @@ img {
 	min-width: 100px;
 }
 
-hr{ /*hr태그 두께 설정*/
+hr { /*hr태그 두께 설정*/
 
 	border: 0;
 	height: 5px;
@@ -45,4 +45,48 @@ hr{ /*hr태그 두께 설정*/
 	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
 	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out.15s;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+}
+
+.comment-form {
+	padding: 12px 12px 12px;
+	background: #fafafa;
+	border-top: 2px solid #b2dba1;
+	overflow: hidden;
+}
+
+.user-info-form {
+	width: 140px;
+	height: 30px;
+	margin-top: 5px;
+	border: 1px solid #cecdce;
+	background: #f3f3f3;
+}
+
+.comment {
+	border: 2px solid #b2dba1;
+}
+
+#wrapper {
+	display: table;
+}
+#cell {
+	display: table-cell;
+	vertical-align: middle;
+	padding-left: 10px;
+}
+
+.cmt_nickbox {
+	float: left;
+	width: 132px;
+	margin-right: 33px;
+	margin-top: 3px;
+}
+
+.cmt_txtbox {
+	float: left;
+}
+
+.comment_box {
+	position: relative;
+	border-top: 2px solid #525eaa;
 }

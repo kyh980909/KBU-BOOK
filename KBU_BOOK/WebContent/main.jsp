@@ -33,9 +33,10 @@
     <title>KBU BOOK</title>
 </head>
 <body>
-<div class="text-center">
-<h1><b>오늘의 학식</b></h1>
-</div>
+<% if (lunchList.getDate() == null) { // 디비에 없는 데이터를 불러오려 할 때 예외처리 %>
+<h1 class="text-center">아직 학식메뉴가 업데이트 되지 않았습니다.</h1>
+<%} else {%>
+<h1 class="text-center">오늘의 학식</h1>
 <br>
 <table class="schoolfood">
     <colgroup>
@@ -84,13 +85,13 @@
     </tr>
     </tbody>
 </table>
-
+<%}%>
+<br>
+<jsp:include page="footer.jsp"/>
+</body>
+</html>
 <%
     } else {
         out.print("<script>alert('로그인을 해주세요.'); location.href='../index.jsp';</script>");
     }
 %>
-<br>
-<jsp:include page="footer.jsp"/>
-</body>
-</html>
