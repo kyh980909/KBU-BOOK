@@ -15,11 +15,10 @@
     <jsp:setProperty name="freetalk" property="ip" param="ip"/>
 </jsp:useBean>
 <%
-    int id = Integer.parseInt(request.getParameter("id"));  // 글 번호
+    int id = Integer.parseInt(request.getParameter("l_id"));  // 글 번호
 
-    System.out.println(freetalk.getWriter());
     FreeTalkDAO freeTalkDAO = new FreeTalkDAO();
     freeTalkDAO.writeComment(id, freetalk.getWriter(), freetalk.getContent(), freetalk.getIp());
 
-    response.sendRedirect("viewAction.jsp?id="+id);
+    response.sendRedirect("view.jsp?id="+id);
 %>

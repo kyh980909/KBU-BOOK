@@ -50,7 +50,8 @@ hr { /*hr태그 두께 설정*/
 .comment-form {
 	padding: 12px 12px 12px;
 	background: #fafafa;
-	border-top: 2px solid #b2dba1;
+	border-top: 2px solid #525eaa;
+	border-bottom: 2px solid #525eaa;
 	overflow: hidden;
 }
 
@@ -69,24 +70,79 @@ hr { /*hr태그 두께 설정*/
 #wrapper {
 	display: table;
 }
+
 #cell {
 	display: table-cell;
 	vertical-align: middle;
 	padding-left: 10px;
 }
 
-.cmt_nickbox {
+.cmt-writer-box {
 	float: left;
 	width: 132px;
 	margin-right: 33px;
 	margin-top: 3px;
 }
 
-.cmt_txtbox {
+.cmt-content-box {
 	float: left;
 }
 
-.comment_box {
-	position: relative;
+.comment-box {
 	border-top: 2px solid #525eaa;
+	border-bottom: 2px solid #525eaa;
+	overflow: hidden;
+}
+
+.comment-wrap {
+	overflow: hidden;
+	width: 100%;
+	font-size: 13px;
+	color: #333;
+	display: inline-block;
+}
+
+.view-table-bordered {
+	border-top: 2px solid #b2dba1;
+	border-bottom: 2px solid #b2dba1;
+}
+
+.view-table-bordered > thead {
+	font-size: 30px;
+	border-top: 2px solid #b2dba1;
+	border-bottom: 3px solid #b2dba1;
+}
+
+.view-table-bordered > tbody {
+	font-size: 20px;
+}
+
+.view-table {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+
+.delete-bt {
+	background-color: #f8585b;
+	border: none;
+	color: #fff;
+	padding: 0 5px 0 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 5px;
+	margin: 4px;
+}
+
+.hidden-bt {
+	background-color: #fff;
+	border: none;
+	color: #fff;
+	padding: 0 5px 0 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 5px;
+	margin: 4px;
 }

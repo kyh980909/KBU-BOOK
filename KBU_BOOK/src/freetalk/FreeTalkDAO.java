@@ -240,7 +240,7 @@ public class FreeTalkDAO {
         try {
             con = pool.getConnection();
 
-            sql = "insert freetalk_comment(id, writer, content, date, ip) values(?, ?, ?, now(), ?)";
+            sql = "insert freetalk_comment(l_id, writer, content, date, ip) values(?, ?, ?, now(), ?)";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.setString(2, writer);
@@ -267,14 +267,14 @@ public class FreeTalkDAO {
         try {
             con = pool.getConnection();
 
-            sql = "select * from freetalk_comment where id="+id+" order by id ";
+            sql = "select * from freetalk_comment where l_id="+id+" order by l_id ";
             pstmt = con.prepareStatement(sql);
 
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 FreeTalkComment freeTalkComment = new FreeTalkComment();
-                freeTalkComment.setId(rs.getInt("id"));
+                freeTalkComment.setCid(rs.getInt("c_id"));
                 freeTalkComment.setWriter(rs.getString("writer"));
                 freeTalkComment.setContent(rs.getString("content"));
                 freeTalkComment.setDate(rs.getDate("date"));
@@ -304,5 +304,26 @@ public class FreeTalkDAO {
         }
 
         return list;
+    }
+
+    // 댓글 삭제
+    public void deleteComment(int num) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        try {
+            con = pool.getConnection();
+            sql = "delete from freetalk_comment where c_id=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, num);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+            if (con != null) try { con.close(); } catch(SQLException ex) {}
+        }
     }
 }

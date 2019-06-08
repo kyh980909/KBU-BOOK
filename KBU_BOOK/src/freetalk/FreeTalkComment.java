@@ -3,18 +3,18 @@ package freetalk;
 import java.sql.Date;
 
 public class FreeTalkComment {
-    private int id;
+    private int cid;
     private String content;
     private String writer;
     private Date date;
     private String ip;
 
-    public int getId() {
-        return id;
+    public int getCid() {
+        return cid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCid(int cid) {
+        this.cid = cid;
     }
 
     public String getContent() {

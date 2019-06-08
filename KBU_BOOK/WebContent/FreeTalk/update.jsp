@@ -50,11 +50,11 @@
             </tr>
             <tr>
                 <td><textarea id="content" name="content" class="form-control"
-                              style="resize: none; height: 600px" maxlength="2048"><%=content%></textarea></td>
+                              style="resize: none; height: 600px"><%=content%></textarea></td>
             </tr>
             </tbody>
         </table>
-        <input type="hidden" name="writer" value=<%=session.getAttribute("id")%>>
+        <input type="hidden" name="writer" value="<%=session.getAttribute("session_id")%>">
         <input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
         <div class="pull-right">
             <input type="button" class="btn btn-info" value="뒤로가기" onclick="history.go(-1)">
