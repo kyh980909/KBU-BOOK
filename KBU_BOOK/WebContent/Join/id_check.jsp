@@ -6,12 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" language="java" %>
-<jsp:useBean id="memberDAO" class="kbu.MemberDAO" />
+<jsp:useBean id="MemberDAO" class="kbu.MemberDAO" />
 <% request.setCharacterEncoding("EUC-KR");%>
 
 <%   String id = request.getParameter("id");
-    boolean result = memberDAO.checkId(id); %>
-아이디값 확인: <%=result%>
+    boolean result = MemberDAO.checkId(id); %>
 <style>
     @import "../css/style.css";
 </style>

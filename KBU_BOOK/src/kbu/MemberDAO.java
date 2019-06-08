@@ -1,16 +1,12 @@
 package kbu;
 
 import java.sql.*;
-/*
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;*/
 
 public class MemberDAO { //DB연결
     private DBConnectionMgr pool = null;
     private static MemberDAO instance;
 
-    // private MemberDAO(){}
+
     public static MemberDAO getInstance() {
         if (instance == null)
             instance = new MemberDAO();
@@ -70,7 +66,6 @@ public class MemberDAO { //DB연결
         try {
             // 쿼리 - 먼저 입력된 아이디로 DB에서 비밀번호를 조회한다.
             StringBuffer query = new StringBuffer();
-            //pstmt=con.prepareStatement("select pwd from member where id = ?");
             query.append(" SELECT pwd FROM member WHERE id=?");
 
             con = pool.getConnection(); //커넥션 연결
@@ -167,33 +162,29 @@ public class MemberDAO { //DB연결
 
         try {
             con = pool.getConnection(); //커넥션 연결
-
-            pstmt = con.prepareStatement("select * from student where std_id="+std_id);
-
+            pstmt = con.prepareStatement("select * from student where std_id = "+std_id); //DB에서 학번을 입력 받으면 나머지의 학생정보를 저장한다.
             rs = pstmt.executeQuery(); //객체에 결과값을 담을때 사용한다.
 
-            if (rs.next()) {
+            while (rs.next()) {
                 member.setName(rs.getString("name1"));
                 member.setGrade(rs.getString("grade"));
                 member.setDepartment(rs.getString("department"));
             }
 
-            return member;
-
+                return member;
         } finally {
             if (rs != null) try {
                 rs.close();
             } catch (SQLException ex) {
-                System.out.println("에러(id찾기): " + ex);
+                System.out.println("에러(학생정보찾기): " + ex);
             }
             if (pstmt != null) try {
                 pstmt.close();
             } catch (SQLException ex) {
-                System.out.println("에러(id찾기2): " + ex);
+                System.out.println("에러(학생정보찾기2): " + ex);
             }
         }
     }
-
 
 
 }

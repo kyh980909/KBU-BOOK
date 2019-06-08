@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="../css/bootstrap.min.css"><!--부트스트랩 css를 불러옴-->
 <style>
 @import "../css/style.css";
+
 body{
 background-color: rgba(69, 255, 57, 0.06);
 background-position: center;
@@ -64,7 +65,7 @@ background-size: auto;
          return false;
         }
     url="id_check.jsp?id="+inputid.id.value; //url+사용자 입력 id값 조회
-    window.open(url, "id_check","toolbar=no, location=center, status=no, resizable=no, width=500, height=300");  //팝업창을 통해 중복 아이디를 확인 가능!
+    window.open(url, "id_check","toolbar=no, location=center, status=no, resizable=no, width=500, height=200");  //팝업창을 통해 중복 아이디를 확인 가능!
     }
     function check_join() {
     var form = document.form;
@@ -84,6 +85,10 @@ background-size: auto;
 
 }
  function studentid_checek(instdid) {
+     if(instdid.std_id.value ==""){
+         alert("학번을 입력하세요!");
+         return false;
+     }
      url="stdid_check.jsp?std_id="+instdid.std_id.value; //url+사용자 입력 id값 조회
      window.open(url, "stdid_check","toolbar=no, location=center, status=no, resizable=no, width=500, height=300");
  }
