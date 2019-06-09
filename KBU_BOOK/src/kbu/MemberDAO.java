@@ -1,6 +1,10 @@
 package kbu;
 
 import java.sql.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.mail.Session;
+import java.util.Properties;
 
 public class MemberDAO { //DB연결
     private DBConnectionMgr pool = null;
@@ -112,7 +116,6 @@ public class MemberDAO { //DB연결
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-
         try {
             con = pool.getConnection(); //커넥션 연결
             pstmt = con.prepareStatement("select id from member where std_id = ? and email = ?");
@@ -153,7 +156,6 @@ public class MemberDAO { //DB연결
         }
     }
 
-
     public Member search_student(String std_id) throws Exception { // 학생 정보 찾기 메서드
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -162,7 +164,7 @@ public class MemberDAO { //DB연결
 
         try {
             con = pool.getConnection(); //커넥션 연결
-            pstmt = con.prepareStatement("select * from student where std_id = "+std_id); //DB에서 학번을 입력 받으면 나머지의 학생정보를 저장한다.
+            pstmt = con.prepareStatement("select * from student where std_id = " + std_id); //DB에서 학번을 입력 받으면 나머지의 학생정보를 저장한다.
             rs = pstmt.executeQuery(); //객체에 결과값을 담을때 사용한다.
 
             while (rs.next()) {
@@ -171,7 +173,7 @@ public class MemberDAO { //DB연결
                 member.setDepartment(rs.getString("department"));
             }
 
-                return member;
+            return member;
         } finally {
             if (rs != null) try {
                 rs.close();
@@ -186,6 +188,63 @@ public class MemberDAO { //DB연결
         }
     }
 
+    public static class  Email { //이메일 인증 메소드
+        public String connectEmail(String email){
+
+            String to1 = email; // 인증위해 사용자가 입력한 이메일주소
+            String host = "smtp.gmail.com"; // smtp 서버
+            String subject = "KBUBOOK 회원가입 인증번호"; // 보내는 제목 설정
+            String fromName = "KBUBOOK JOIN TEAM"; // 보내는 이름 설정
+            String from = "korlgg2@gmail.com"; // 보내는 사람(구글계정)
+            String CODE = Email.code(); // 인증번호 위한 난수 발생부분
+            String content = "인증번호는 [" + CODE + "] 입니다. <br> 인증번호를 정확히 입력해주십시오." ; // 이메일 내용 설정
+
+            // SMTP 이용하기 위해 설정해주는 설정값들
+            try { //건들지 말것!
+                Properties props = new Properties();
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.transport.protocol", "smtp");
+                props.put("mail.smtp.host", host);
+                props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                props.put("mail.smtp.port", "465");
+                props.put("mail.smtp.user", from);
+                props.put("mail.smtp.auth", "true");
+
+                Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication
+                                ("korlgg2@gmail.com", "kbubook!004"); // gmail계정
+                    }
+                });
+
+                Message msg = new MimeMessage(mailSession);
+                InternetAddress[] address1 = {new InternetAddress(to1)}; //이메일 전송
+                msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
+                msg.setRecipients(Message.RecipientType.TO, address1); // 받는사람 설정
+                msg.setSubject(subject); // 제목설정
+                msg.setSentDate(new java.util.Date()); // 보내는 날짜 설정
+                msg.setContent(content, "text/html; charset=utf-8"); // 내용설정 및 인코딩
+                Transport.send(msg); // 메일보내기
+                System.out.println("이메일 보내기 성공");
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                System.out.println("이메일 보내기 오류: "+e);
+            } catch (Exception e) {
+                System.out.println("이메일 보내기 오류2 "+e);
+                e.printStackTrace();
+            }
+            return CODE;
+        }
+
+        public static String code() {   // 인증번호 난수 발생 메소드
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0; i <= 5; i++) {
+                int num = (int)(Math.random() * 10);
+                buffer.append(num);
+            }
+            return buffer.toString();
+        }
+    }
 
 }
 

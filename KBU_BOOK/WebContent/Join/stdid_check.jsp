@@ -15,8 +15,8 @@
 </style>
 <%  String std_id = request.getParameter("std_id");
     kbu.MemberDAO d = MemberDAO.getInstance();
-    Member member = new Member();
-    member = d.search_student(std_id);
+ //   Member member = new Member();
+  Member member = d.search_student(std_id);
 %>
 <html>
 <head>
