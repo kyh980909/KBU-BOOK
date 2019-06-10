@@ -67,7 +67,7 @@ background-size: auto;
          return false;
         }
     url="id_check.jsp?id="+inputid.id.value; //url+사용자 입력 id값 조회
-    window.open(url, "id_check","toolbar=no, location=center, statusbar=no, resizable=no, width=500, height=100");  //팝업창을 통해 중복 아이디를 확인 가능!
+    window.open(url, "id_check","toolbar=no, location=center, statusbar=no, resizable=no, width=500, height=140");  //팝업창을 통해 중복 아이디를 확인 가능!
     }
 
     function inputid_check() { // 아이디 입력창에 값 입력시 hidden에 idUncheck를 저장한다. 이렇게 하는 이유는 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때 다시 중복체크를 하기 위해서이다.

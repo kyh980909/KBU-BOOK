@@ -156,11 +156,11 @@ public class MemberDAO { //DB연결
         }
     }
 
-    public Member search_student(String std_id) throws Exception { // 학생 정보 찾기 메서드
+    public Student search_student(String std_id) throws Exception { // 학생 정보 찾기 메서드
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        Member member = new Member();
+        Student student = new Student();
 
         try {
             con = pool.getConnection(); //커넥션 연결
@@ -168,12 +168,13 @@ public class MemberDAO { //DB연결
             rs = pstmt.executeQuery(); //객체에 결과값을 담을때 사용한다.
 
             while (rs.next()) {
-                member.setName(rs.getString("name1"));
-                member.setGrade(rs.getString("grade"));
-                member.setDepartment(rs.getString("department"));
+                student.setName(rs.getString("name1"));
+                student.setGrade(rs.getString("grade"));
+                student.setDepartment(rs.getString("department"));
             }
 
-            return member;
+            return student;
+
         } finally {
             if (rs != null) try {
                 rs.close();
@@ -189,7 +190,7 @@ public class MemberDAO { //DB연결
     }
 
     public static class Email { //이메일 인증 메소드
-        public String connectEmail(String email){
+        public String connectEmail(String email) {
 
             String to1 = email; // 인증위해 사용자가 입력한 이메일주소
             String host = "smtp.gmail.com"; // smtp 서버
@@ -197,7 +198,7 @@ public class MemberDAO { //DB연결
             String fromName = "KBUBOOK JOIN TEAM"; // 보내는 이름 설정
             String from = "korlgg2@gmail.com"; // 보내는 사람(구글계정)
             String CODE = Email.code(); // 인증번호 위한 난수 발생부분
-            String content = "인증번호는 [" + CODE + "] 입니다. <br> 인증번호를 정확히 입력해주십시오." ; // 이메일 내용 설정
+            String content = "인증번호는 [" + CODE + "] 입니다. <br> 인증번호를 정확히 입력해주십시오."; // 이메일 내용 설정
 
             // SMTP 이용하기 위해 설정해주는 설정값들
             try { //건들지 말것!
@@ -228,9 +229,9 @@ public class MemberDAO { //DB연결
                 System.out.println("이메일 보내기 성공");
             } catch (MessagingException e) {
                 e.printStackTrace();
-                System.out.println("이메일 보내기 오류: "+e);
+                System.out.println("이메일 보내기 오류: " + e);
             } catch (Exception e) {
-                System.out.println("이메일 보내기 오류2 "+e);
+                System.out.println("이메일 보내기 오류2 " + e);
                 e.printStackTrace();
             }
             return CODE;
@@ -239,12 +240,107 @@ public class MemberDAO { //DB연결
         public static String code() {   // 인증번호 난수 발생 메소드
             StringBuffer buffer = new StringBuffer();
             for (int i = 0; i <= 5; i++) {
-                int num = (int)(Math.random() * 10);
+                int num = (int) (Math.random() * 10);
                 buffer.append(num);
             }
             return buffer.toString();
         }
     }
 
+    public Member getmember(String id) throws Exception { //회원정보 수정을 위하여 정보를 가져오는 메서드
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Member member = null;
+        try {
+            con = pool.getConnection(); //커넥션 연결
+            pstmt = con.prepareStatement("select * from member where id = ?"); //DB에서 id를 검색하여 회원정보를 불러오는 sql문
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery(); //객체에 결과값을 담을때 사용한다.
+            if (rs.next()) {
+                member = new Member();
+                member.setStd_id(rs.getString("std_id"));
+                member.setId(rs.getString("id"));
+                member.setPwd(rs.getString("pwd"));
+                member.setEmail(rs.getString("email"));
+                member.setTel(rs.getString("tel"));
+                member.setJoin_date(rs.getTimestamp("join_date"));
+            }
+        } catch (Exception e) {
+            System.out.println("회원정보 가져옴 오류: " + e);
+        } finally {
+            if (rs != null) try {
+                rs.close();
+            } catch (SQLException ex) {
+            }
+            if (pstmt != null) try {
+                pstmt.close();
+            } catch (SQLException ex) {
+            }
+            if (con != null) try {
+                con.close();
+            } catch (SQLException ex) {
+            }
+        }
+        return member;
+    }
+
+    public boolean update_member(Member member) throws Exception { //회원정보 변경 메소드
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        boolean up = false;
+        try {
+            con = pool.getConnection(); //커넥션 연결
+            pstmt = con.prepareStatement("update member set pwd = ?, tel = ? where id =?"); //DB에서 변경할 회원정보
+            pstmt.setString(1, member.getPwd());
+            pstmt.setString(2, member.getTel());
+            pstmt.setString(3, member.getId());
+            pstmt.executeUpdate();
+            System.out.println("회원 정보 변경 성공");
+        } catch (Exception e) {
+            System.out.println("회원 정보 변경 오류: " + e);
+        } finally {
+            if (pstmt != null) try {
+                pstmt.close();
+            } catch (SQLException ex) {
+            }
+            if (con != null) try {
+                con.close();
+            } catch (SQLException ex) {
+            }
+        }
+        return up;
+    }
+
+    public boolean delete_member(String id) throws Exception { //회원탈퇴 메소드
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        boolean del = false;
+        try {
+            con = pool.getConnection(); //커넥션 연결
+            pstmt = con.prepareStatement("delete from member where id =?");
+            pstmt.setString(1, id);
+            int c = pstmt.executeUpdate();
+            del = true;
+            System.out.println("회원탈퇴 성공");
+        } catch (Exception e) {
+            System.out.println("회원탈퇴 실패: " + e);
+        } finally {
+            if (pstmt != null) try {
+                pstmt.close();
+            } catch (SQLException ex) {
+            }
+            if (con != null) try {
+                con.close();
+            } catch (SQLException ex) {
+            }
+        }
+        return del;
+    }
+
 }
+
+
+
 

@@ -30,7 +30,7 @@
 			<input class="form-control" type="text" placeholder="아이디를 입력하세요!" name="id" required><br>
 			<input class="form-control" type="password" placeholder="비밀번호를 입력하세요!" name="pwd" required><br>
 			<input class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">
-		<br><a href="Join/join.jsp"><p align="center">회원가입<a href='Login/s_id.jsp' onclick="window.open(this.href,'ID찾기','toolbar=no, location=center, status=no, resizable=no, width=800, height=200'); return false;"> 아이디&비밀번호 찾기 </a></p><br>
+		<br><a href="Join/Join.jsp"><p align="center">회원가입<a href='Login/s_id.jsp' onclick="window.open(this.href,'ID찾기','toolbar=no, location=center, status=no, resizable=no, width=800, height=200'); return false;"> 아이디&비밀번호 찾기 </a></p><br>
 		</a>
 		</form>
 	</div>
