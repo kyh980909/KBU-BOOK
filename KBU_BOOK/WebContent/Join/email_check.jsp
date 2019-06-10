@@ -28,7 +28,7 @@ String email1=request.getParameter("email");
 <form method="post" action="" name="email_check">
     <div align="center">
         <serach>학교 이메일 인증</serach>
-        <hr></hr>
+        <hr>
     <p> <input type="text" name="emailbox" placeholder="인증번호를 입력하십시오!" class="text-form" size="10" maxlength="6" > <input type="button" value="인증" onclick="check_e(this.form, <%=Num%>)" class="btn btn-success"> </p>
         <p><b><%=email1%> 로 인증번호가 </b> 전송되었습니다. 정확히 입력해주세요 ^.^</p>
     </div>

@@ -1,8 +1,12 @@
 package schoolfood;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kbu.DBConnectionMgr;
 import util.UtilMgr;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +19,9 @@ public class SchoolFoodDAO {
     private String today = sdf.format(System.currentTimeMillis()); // 오늘 날짜 문자열로 저장
 
     private DBConnectionMgr pool;
+    private static final String saveFolder = "fileupload";
+    private static final String enctype = "UTF-8";
+    private static int MAXSIZE = 5 * 1024 * 1024;
 
     public SchoolFoodDAO() {
         try {
@@ -440,5 +447,53 @@ public class SchoolFoodDAO {
         }
 
         return daily;
+    }
+
+    public void upload(HttpServletRequest req) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+
+        MultipartRequest multi = null;
+        int filesize = 0;
+        String filename = null;
+
+        try {
+            con = pool.getConnection();
+            File file = new File(saveFolder);
+            if (!file.exists())
+                file.mkdirs();
+            multi = new MultipartRequest(req, saveFolder, MAXSIZE, enctype, new DefaultFileRenamePolicy());
+            if (multi.getFilesystemName("filename") != null) {
+                filename = multi.getFilesystemName("filename");
+                filesize = (int) multi.getFile("filename").length();
+            }
+
+            String content = multi.getParameter("content");
+            if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
+                content = UtilMgr.replace(content, "<", "&lt;");
+
+                sql = "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try {
+                rs.close();
+            } catch (SQLException ex) {
+
+            }
+            if (pstmt != null) try {
+                pstmt.close();
+            } catch (SQLException ex) {
+
+            }
+            if (con != null) try {
+                con.close();
+            } catch (SQLException ex) {
+
+            }
+        }
     }
 }

@@ -89,7 +89,7 @@
                 <div>
                     <div class="cmt-writer-box"><%=ftk.getWriter()%>
                     </div>
-                    <div class="cmt-content-box"><%=ftk.getContent()%>
+                    <div class="cmt-content-box"><%=ftk.getContent().replace("/r/n", "<br>")%>
                     </div>
                     <div class="pull-right">
                         <div class="pull-left"><%=ftk.getDate()%>

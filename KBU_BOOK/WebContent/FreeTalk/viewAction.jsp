@@ -18,7 +18,7 @@
     int id = Integer.parseInt(request.getParameter("l_id"));  // 글 번호
 
     FreeTalkDAO freeTalkDAO = new FreeTalkDAO();
-    freeTalkDAO.writeComment(id, freetalk.getWriter(), freetalk.getContent(), freetalk.getIp());
+    freeTalkDAO.writeComment(id, freetalk.getWriter(), freetalk.getContent().replace("/r/n", "<br>"), freetalk.getIp());
 
     response.sendRedirect("view.jsp?id="+id);
 %>

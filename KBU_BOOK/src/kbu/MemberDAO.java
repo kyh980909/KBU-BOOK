@@ -188,7 +188,7 @@ public class MemberDAO { //DB연결
         }
     }
 
-    public static class  Email { //이메일 인증 메소드
+    public static class Email { //이메일 인증 메소드
         public String connectEmail(String email){
 
             String to1 = email; // 인증위해 사용자가 입력한 이메일주소

@@ -220,7 +220,7 @@ public class FreeTalkDAO {
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, freetalk.getWriter());
             pstmt.setString(2, freetalk.getTitle());
-            pstmt.setString(3, freetalk.getContent());
+            pstmt.setString(3, freetalk.getContent().replace("/r/n", "<br>"));
             pstmt.setInt(4, freetalk.getId());
             pstmt.executeUpdate();
         } catch (Exception e) {
@@ -244,7 +244,7 @@ public class FreeTalkDAO {
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.setString(2, writer);
-            pstmt.setString(3, content);
+            pstmt.setString(3, content.replace("/r/n", "<br>"));
             pstmt.setString(4, ip);
             pstmt.executeUpdate();
         } catch (Exception e) {
