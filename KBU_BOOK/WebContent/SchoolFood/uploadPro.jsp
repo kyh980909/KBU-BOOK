@@ -1,8 +1,19 @@
-<%@ page import="schoolfood.SchoolFoodDAO" %>
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
-<%@ page import="java.util.Enumeration" %>
-<%@ page import="java.io.File" %><%--
+<%@ page import="java.io.File" %>
+<%@ page import="org.apache.poi.ss.usermodel.Cell" %>
+<%@ page import="org.apache.poi.ss.usermodel.Row" %>
+<%@ page import="org.apache.poi.ss.usermodel.Sheet" %>
+<%@ page import="org.apache.poi.openxml4j.opc.OPCPackage" %>
+<%@ page import="org.apache.poi.ss.usermodel.Workbook" %>
+<%@ page import="org.apache.poi.xssf.usermodel.XSSFWorkbook" %>
+<%@ page import="org.apache.poi.hssf.usermodel.HSSFWorkbook" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.io.FileInputStream" %>
+<%@ page import="java.util.Vector" %>
+<%@ page import="schoolfood.*" %>
+<%--
   Created by IntelliJ IDEA.
   User: yongho
   Date: 2019-06-10
@@ -14,70 +25,105 @@
 <head>
     <title>KBU BOOK</title>
 </head>
-
+<body>
 <%
-    // request.getRealPath("상대경로") 를 통해 파일을 저장할 절대 경로를 구해온다.
-    // 운영체제 및 프로젝트가 위치할 환경에 따라 경로가 다르기 때문에 아래처럼 구해오는게 좋음
-    String uploadPath = request.getRealPath("/uploadFile");
-    out.println("절대경로 : " + uploadPath + "<br>");
+    String path = application.getRealPath("/");
+    MultipartRequest multipartRequest = new MultipartRequest(request, path, 1024 * 1024 * 3, "utf-8", new DefaultFileRenamePolicy());
 
-    int maxSize = 1024 * 1024 * 10; // 한번에 올릴 수 있는 파일 용량 : 10M로 제한
+    String originalFileName = multipartRequest.getOriginalFileName("file");
+    File file = multipartRequest.getFile("file");
 
-    String name = "";
-    String subject = "";
+    FileInputStream excelFile = new FileInputStream(file);
 
-    String fileName1 = ""; // 중복처리된 이름
-    String originalName1 = ""; // 중복 처리전 실제 원본 이름
-    long fileSize = 0; // 파일 사이즈
-    String fileType = ""; // 파일 타입
-
-    MultipartRequest multi = null;
-
-    try{
-        // request,파일저장경로,용량,인코딩타입,중복파일명에 대한 기본 정책
-        multi = new MultipartRequest(request,uploadPath,maxSize,"utf-8",new DefaultFileRenamePolicy());
-
-        // form내의 input name="name" 인 녀석 value를 가져옴
-        name = multi.getParameter("name");
-        // name="subject" 인 녀석 value를 가져옴
-        subject = multi.getParameter("subject");
-
-        // 전송한 전체 파일이름들을 가져옴
-        Enumeration files = multi.getFileNames();
-
-        while(files.hasMoreElements()){
-            // form 태그에서 <input type="file" name="여기에 지정한 이름" />을 가져온다.
-            String file1 = (String)files.nextElement(); // 파일 input에 지정한 이름을 가져옴
-            // 그에 해당하는 실재 파일 이름을 가져옴
-            originalName1 = multi.getOriginalFileName(file1);
-            // 파일명이 중복될 경우 중복 정책에 의해 뒤에 1,2,3 처럼 붙어 unique하게 파일명을 생성하는데
-            // 이때 생성된 이름을 filesystemName이라 하여 그 이름 정보를 가져온다.(중복에 대한 처리)
-            fileName1 = multi.getFilesystemName(file1);
-            // 파일 타입 정보를 가져옴
-            fileType = multi.getContentType(file1);
-            // input file name에 해당하는 실재 파일을 가져옴
-            File file = multi.getFile(file1);
-            // 그 파일 객체의 크기를 알아냄
-            fileSize = file.length();
-        }
-    }catch(Exception e){
-        e.printStackTrace();
+    Workbook workbook = null;
+    OPCPackage opcPackage = null;
+    if(originalFileName.endsWith("xlsx") || originalFileName.endsWith("xlsm")){
+        opcPackage = OPCPackage.open(excelFile);
+        workbook = new XSSFWorkbook(opcPackage);
+    } else {
+        workbook = new HSSFWorkbook(excelFile);
     }
+
+    Row row = null;
+    Cell cell = null;
+
+    Sheet sheet = workbook.getSheetAt(0);
+
+    String cellString = "";
+
+    Vector<Lunch> lunches = new Vector<Lunch>();
+    Vector<Dinner> dinners = new Vector<Dinner>();
+    Vector<Fix> fixes = new Vector<Fix>();
+    Vector<Daily> dailies = new Vector<Daily>();
+
+    String[] day = {"월요일", "화요일", "수요일", "목요일", "금요일"};
+
+
+    // 각 식단의 날짜를 저장하는 반복문
+
+    for (int col = 2; col <= 10; col+=2) {
+        Lunch lunch = new Lunch();
+        Dinner dinner = new Dinner();
+        Fix fix = new Fix();
+        Daily daily = new Daily();
+
+        String[] food = new String[6];  // 중식용 배열
+        String[] food2 = new String[6];  // 석식용 배열
+        String[] food3 = new String[2]; // 고정메뉴용 배열
+        row = sheet.getRow(1);
+        cell = row.getCell(col);
+        Date date_format = cell.getDateCellValue();
+        cellString = new SimpleDateFormat("yyyyMMdd").format(date_format);
+        lunch.setDate(cellString);
+        dinner.setDate(cellString);
+        fix.setDate(cellString);
+        daily.setDate(cellString);
+
+        lunch.setDay(day[col/2-1]);
+        dinner.setDay(day[col/2-1]);
+        fix.setDay(day[col/2-1]);
+        daily.setDay(day[col/2-1]);
+
+        // 엑셀 파일 중식 데이터 접근 반복문
+        for (int r = 3; r <= 8; r++) {
+            row = sheet.getRow(r);
+            cell = row.getCell(col);
+            food[r-3] = cell.toString();
+        }
+        lunch.setFood(food); // 중식을 Lunch 객체에 저장
+
+        // 엑셀 파일 석식 데이터 접근 반복문
+        for (int r = 15; r <= 20; r++) {
+            row = sheet.getRow(r);
+            cell = row.getCell(col);
+            food2[r-15] = cell.toString();
+        }
+        dinner.setFood(food2);
+
+        // 엑셀 파일 고정메뉴 데이터 접근 반복문
+        for (int r = 10; r <= 11; r++) {
+            row = sheet.getRow(r);
+            cell = row.getCell(col);
+            food3[r - 10] = cell.toString();
+        }
+        fix.setFood(food3);
+
+        // 엑셀 파일 데일리메뉴 데이터 접근 반복문
+        row = sheet.getRow(13);
+        cell = row.getCell(col);
+        daily.setFood(cell.toString());
+
+        lunches.add(col/2-1, lunch);
+        dinners.add(col/2-1, dinner);
+        fixes.add(col/2-1, fix);
+        dailies.add(col/2-1, daily);
+    }
+
+    workbook.close();
+    if(opcPackage != null){	opcPackage.close();	}
+
+    SchoolFoodDAO schoolFoodDAO = new SchoolFoodDAO();
+
+    schoolFoodDAO.upload(lunches, dinners, fixes, dailies);
 %>
-<!--
-	해당 페이지는 사용자에게 보여줄 필요가 없고 해당 정보를 전달만 해주면 되기 때문에 hidden으로 했다.
- -->
-<form action="fileCheck.jsp" method="post" name="fileCheckFormName">
-    <input type="hidden" value="<%=name%>" name="name" />
-    <input type="hidden" value="<%=subject%>" name="subject" />
-    <input type="hidden" value="<%=fileName1%>" name="fileName1" />
-    <input type="hidden" value="<%=originalName1%>" name="originalName1" />
-</form>
-
-<!--
-	a태그로 클릭시 파일체크하는 jsp페이지로 이동하도록 함
-	javascript를 이용해서 onclick시 폼태그를 잡아와 submit()을 호출해 폼태그를 전송
- -->
-<a href="#" onclick="javascript:document.fileCheckFormName.submit()">업로드 파일 확인하기 :<%=fileName1 %></a>
-
-</html>
+</body>

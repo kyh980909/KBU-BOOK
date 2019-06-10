@@ -45,8 +45,8 @@
 </div>
 <br><br>
 <div style="margin-left: 40%">
-    <form action="/SchoolFood/uploadPro.jsp" name="upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" size="20" />
+    <form action="uploadPro.jsp" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
         <br>
         <input type="submit" onclick="checkForm();" value="전송">
     </form>

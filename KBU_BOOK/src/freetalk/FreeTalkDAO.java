@@ -1,6 +1,5 @@
 package freetalk;
 
-
 import kbu.DBConnectionMgr;
 
 import java.sql.Connection;

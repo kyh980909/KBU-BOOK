@@ -1,12 +1,8 @@
 package schoolfood;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kbu.DBConnectionMgr;
 import util.UtilMgr;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -449,50 +445,77 @@ public class SchoolFoodDAO {
         return daily;
     }
 
-    public void upload(HttpServletRequest req) {
+    public void upload(Vector<Lunch> lunches, Vector<Dinner> dinners, Vector<Fix> fixes, Vector<Daily> dailies) {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         String sql = null;
 
-        MultipartRequest multi = null;
-        int filesize = 0;
-        String filename = null;
-
         try {
             con = pool.getConnection();
-            File file = new File(saveFolder);
-            if (!file.exists())
-                file.mkdirs();
-            multi = new MultipartRequest(req, saveFolder, MAXSIZE, enctype, new DefaultFileRenamePolicy());
-            if (multi.getFilesystemName("filename") != null) {
-                filename = multi.getFilesystemName("filename");
-                filesize = (int) multi.getFile("filename").length();
+
+            sql = "insert lunch(date,day,food1,food2,food3,food4,food5,food6) values(?,?,?,?,?,?,?,?)";
+            pstmt = con.prepareStatement(sql);
+
+            for (Lunch lunch: lunches) {
+                pstmt.setString(1, lunch.getDate());
+                pstmt.setString(2, lunch.getDay());
+                for (int i = 3; i <= 8; i++)
+                    pstmt.setString(i, lunch.getFood()[i-3]);
+                pstmt.executeUpdate();
             }
 
-            String content = multi.getParameter("content");
-            if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
-                content = UtilMgr.replace(content, "<", "&lt;");
+            sql = "insert dinner(date,day,food1,food2,food3,food4,food5,food6) values(?,?,?,?,?,?,?,?)";
+            pstmt = con.prepareStatement(sql);
 
-                sql = "";
+            for (Dinner dinner: dinners) {
+                pstmt.setString(1, dinner.getDate());
+                pstmt.setString(2, dinner.getDay());
+                for (int i = 3; i <= 8; i++)
+                    pstmt.setString(i, dinner.getFood()[i-3]);
+                pstmt.executeUpdate();
             }
+
+            sql = "insert fix(date,day,food1,food2) values(?,?,?,?)";
+            pstmt = con.prepareStatement(sql);
+
+            for (Fix fix: fixes) {
+                pstmt.setString(1, fix.getDate());
+                pstmt.setString(2, fix.getDay());
+                for (int i = 3; i <= 4; i++)
+                    pstmt.setString(i, fix.getFood()[i-3]);
+                pstmt.executeUpdate();
+            }
+
+            sql = "insert daily(date,day,food1) values(?,?,?)";
+            pstmt = con.prepareStatement(sql);
+
+            for (Daily daily: dailies) {
+                pstmt.setString(1, daily.getDate());
+                pstmt.setString(2, daily.getDay());
+                pstmt.setString(3, daily.getFood());
+                pstmt.executeUpdate();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) try {
-                rs.close();
-            } catch (SQLException ex) {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {}
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException ex) {}
 
             }
-            if (pstmt != null) try {
-                pstmt.close();
-            } catch (SQLException ex) {
 
-            }
-            if (con != null) try {
-                con.close();
-            } catch (SQLException ex) {
-
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {}
             }
         }
     }
