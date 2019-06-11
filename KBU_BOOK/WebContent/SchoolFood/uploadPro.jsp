@@ -125,5 +125,7 @@
     SchoolFoodDAO schoolFoodDAO = new SchoolFoodDAO();
 
     schoolFoodDAO.upload(lunches, dinners, fixes, dailies);
+
+    response.sendRedirect("schoolFood.jsp");
 %>
 </body>

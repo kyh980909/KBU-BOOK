@@ -18,7 +18,9 @@
     // 로그인 화면에 입력된 아이디와 비밀번호를 가져온다
     String id= request.getParameter("id");
     String pwd = request.getParameter("pwd");
+    String url = "";
 
+<<<<<<< Updated upstream:KBU_BOOK/WebContent/Login/loginProc.jsp
     // DB에서 아이디, 비밀번호 확인
     MemberDAO mdo = MemberDAO.getInstance();
     int check = mdo.checklogin(id, pwd);
@@ -29,12 +31,29 @@
     if(check == 1)    // 로그인 성공
     {
         // 세션에 현재 아이디 세팅
+=======
+    if (id.equals("wellsfarm") && pwd.equals("wellsfarm")) { // 영양사님 전용 아이디
+>>>>>>> Stashed changes:KBU_BOOK/WebContent/Login/Loginpro.jsp
         session.setAttribute("session_id", id);
         url ="../main.jsp";
-    }
-    else if(check == 2 || check == 3) // 아이디, 비밀번호가 맞지 않거나 없는 아이디를 입력하였을때
-    {
-        url = "../index.jsp?msg=2";
+    } else {
+
+        // DB에서 아이디, 비밀번호 확인
+        MemberDAO mdo = MemberDAO.getInstance();
+        int check = mdo.checklogin(id, pwd);
+
+        // 로그인 결과에 따라서 해당 주소로 이동
+
+
+        if (check == 1)    // 로그인 성공
+        {
+            // 세션에 현재 아이디 세팅
+            session.setAttribute("session_id", id);
+            url = "../main.jsp";
+        } else if (check == 2 || check == 3) // 아이디, 비밀번호가 맞지 않거나 없는 아이디를 입력하였을때
+        {
+            url = "../index.jsp?msg=2";
+        }
     }
     response.sendRedirect(url); // sendRedirect(String URL) : 해당 URL로 이동, URL뒤에 get방식 처럼 데이터를 전달가능
 %>
