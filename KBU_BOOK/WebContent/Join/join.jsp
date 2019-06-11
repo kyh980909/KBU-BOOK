@@ -136,7 +136,7 @@ background-size: auto;
 <p align="center">학교이메일: <input type="text" name="email" class="text-form" required>@<select name="email2"> <option value="bible.ac.kr" selected>bible.ac.kr</option><option value="stu.bible.ac.kr">stu.bible.ac.kr</option></select> <input type="button" name="email_check" class="btn btn-primary" value="인증하기" onclick="email_c(this.form)">
     <input type="hidden" name="emailcheck" value="emUncheck"> </p>
 <p align="center">휴대전화번호: <input type="tel" name="phone_num" class="text-form" onchange="check_tel(this.form)" maxlength="11" required> </p>
-<p align="center"><input type="button" class="btn btn-success" value="집" onClick="location.href='../index.jsp'"> <input type="reset" value="다시 쓰기" class="btn btn-success"> <input type="submit" value="회원가입" class="btn btn-success" > </p>
+<p align="center"><input type="button" class="btn btn-success" value="Home" onClick="location.href='../index.jsp'"> <input type="reset" value="다시 쓰기" class="btn btn-success"> <input type="submit" value="회원가입" class="btn btn-success" > </p>
 
 <jsp:include page="../footer.jsp"/>
 </form>

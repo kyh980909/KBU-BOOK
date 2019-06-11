@@ -53,20 +53,20 @@ if(id == null){
         }
     }
 </script>
-<jsp:include page="../top.jsp"/>
-
 <html>
 <head>
     <title>KBUBook UserUpdate Page</title>
 </head>
 <body>
+<jsp:include page="../top.jsp"/>
+
 <div align="center">
     <form name="rejoin" method="post" action="update.jsp" onsubmit="">
     <p> 회원정보 수정 페이지</p>
         <p> 학번:<b><%=mem.getStd_id()%></b> </p>
         <p> 회원가입 날짜:<b><%= mem.getJoin_date()%></b></p>
         <p> 아이디: <b><%=id%></b> </p>
-    <p> 학교 아이디: <input type="email" name="email" value="<%=mem.getEmail()%>" class="text-form" readonly> </p>
+    <p>학교 이메일: <input type="email" name="email" value="<%=mem.getEmail()%>" class="text-form" readonly> </p>
         <p><br> <b>회원정보 수정은 비밀번호, 휴대전화번호만 가능 하며 더이상 사용하지 않을경우 회원탈퇴 할 수 있습니다.</b> </p>
     <p> 비밀번호: <input type="password" name="pwd" value="<%=mem.getPwd()%>" class="text-form" required > <input type="hidden" value="<%=mem.getPwd()%>" name="now_pwd"> </p>
     <p> 휴대전화 번호: <input type="tel" name="tel" value="<%=mem.getTel()%>" class="text-form" required> </p>

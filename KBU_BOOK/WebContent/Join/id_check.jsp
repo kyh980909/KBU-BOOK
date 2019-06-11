@@ -10,9 +10,7 @@
 <% request.setCharacterEncoding("EUC-KR");%>
 
 <%   String id = request.getParameter("id");
-    boolean result = MemberDAO.checkId(id);
-    System.out.println(result);
-%>
+    boolean result = MemberDAO.checkId(id); %>
 <style>
     @import "../css/style.css";
 </style>
