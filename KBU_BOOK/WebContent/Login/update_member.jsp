@@ -53,13 +53,13 @@ if(id == null){
         }
     }
 </script>
-<jsp:include page="../top.jsp"/>
-
 <html>
 <head>
     <title>KBUBook UserUpdate Page</title>
 </head>
 <body>
+<jsp:include page="../top.jsp"/>
+
 <div align="center">
     <form name="rejoin" method="post" action="update.jsp" onsubmit="">
     <p> 회원정보 수정 페이지</p>

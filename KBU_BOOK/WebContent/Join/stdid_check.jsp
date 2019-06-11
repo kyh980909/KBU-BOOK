@@ -5,8 +5,8 @@
   Time: 오전 1:16
   To change this template use File | Settings | File Templates.
 --%>
+<%@page import="kbu.Student"%>
 <%@ page import="kbu.MemberDAO" %>
-<%@ page import="kbu.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="../css/bootstrap.min.css"><!--부트스트랩 css를 불러옴-->
 <style>
@@ -16,7 +16,7 @@
 <%  String std_id = request.getParameter("std_id");
     kbu.MemberDAO d = MemberDAO.getInstance();
  //   Member member = new Member();
-  Member member = d.search_student(std_id);
+  Student student = d.search_student(std_id);
 %>
 <html>
 <head>
@@ -29,7 +29,7 @@
     <hr></hr>
     <span style="font-size: 19px">
     <b><%=std_id%></b>님의 학적 정보 입니다.
-    <% if(member.getName() == null || member.getName() == "")
+    <% if(student.getName() == null || student.getName() == "")
         { %>
 
     <p> 학적 정보가 없습니다.<br> 학번을 다시 확인해주시기 바랍니다! </p>
@@ -37,9 +37,9 @@
     <%
         } else{ %>
 
-    <p>이름:<b><%=member.getName()%></b></p>
-    <p>학년: <b><%=member.getGrade()%></b>학년 </p>
-    <p>학과: <b><%=member.getDepartment()%>과</b> </p></span>
+    <p>이름:<b><%=student.getName()%></b></p>
+    <p>학년: <b><%=student.getGrade()%></b>학년</p>
+    <p>학과: <b><%=student.getDepartment()%>과</b></p></span>
     <p><input type="button" value="확인" name="exit" onclick="window.close()" class="btn btn-info"></p>
 <% } %>
 </div>
