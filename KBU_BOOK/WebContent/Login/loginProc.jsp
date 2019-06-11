@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ page import="kbu.memberDAO" %>
+<%@ page import="kbu.MemberDAO" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <html>
 <head>
@@ -22,7 +22,7 @@
 
 <<<<<<< Updated upstream:KBU_BOOK/WebContent/Login/loginProc.jsp
     // DB에서 아이디, 비밀번호 확인
-    memberDAO mdo = memberDAO.getInstance();
+    MemberDAO mdo = MemberDAO.getInstance();
     int check = mdo.checklogin(id, pwd);
 
     // 로그인 결과에 따라서 해당 주소로 이동

@@ -30,7 +30,7 @@
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="../main.jsp">홈</a>
+                <a class="nav-link" href="../main.jsp">Home</a>
             </li>
             <li>
                 <a href="../FreeTalk/freeTalk.jsp">자유수다방</a>
@@ -60,7 +60,6 @@
             <li><a href="../SchoolFood/schoolFood.jsp">식단표</a></li>
             <% } %>
         </ul> <!--식단표 메뉴까지 -->
-
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= session.getAttribute("session_id")%>님
@@ -68,7 +67,7 @@
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="../Login/logoutProc.jsp">로그아웃</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">회원정보 수정</a></li>
+                    <li><a href="../Login/update_member.jsp">회원정보 수정</a></li>
                 </ul>
             </li>
         </ul>

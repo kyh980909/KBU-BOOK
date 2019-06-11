@@ -37,9 +37,9 @@
         pstmt.setString(5, tel);
         pstmt.setTimestamp(6, join_date);
         pstmt.executeUpdate();
-        out.println("축하합니다! 회원가입 성공 입니다! \n 3초후 메인홈페이지로 자동이동 합니다."); %>
+        out.println("축하합니다! 회원가입 성공 입니다! \n 2초후 메인홈페이지로 자동이동 합니다."); %>
 <hr class="hr"> <input type="button" value="Home" onClick="location.href='../index.jsp'">
-<meta http-equiv="refresh" content="3; URL=../index.jsp"> <!--3초후 메인홈페이지로 이동-->
+<meta http-equiv="refresh" content="2; URL=../index.jsp"> <!--2초후 메인홈페이지로 이동-->
 </hr>
   <%  }catch(Exception e){
     out.println("회원가입에 실패 했습니다. 에러: "+e);%>

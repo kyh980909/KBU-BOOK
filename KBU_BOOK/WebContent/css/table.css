@@ -1,4 +1,4 @@
-table.schoolfood {
+.schoolfood {
     border-collapse: separate;
     border-spacing: 0;
     text-align: left;
@@ -8,7 +8,7 @@ table.schoolfood {
     margin: 0 auto;
 }
 
-table.schoolfood th {
+.schoolfood th {
     width: 150px;
     padding: 10px;
     font-weight: bold;
@@ -21,7 +21,7 @@ table.schoolfood th {
     text-align: center;
 }
 
-table.schoolfood td {
+.schoolfood td {
     width: 350px;
     padding: 10px;
     vertical-align: top;

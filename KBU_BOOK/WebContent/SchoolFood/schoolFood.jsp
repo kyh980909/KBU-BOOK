@@ -10,13 +10,18 @@
 <%@ page import="schoolfood.Dinner" %>
 <%@ page import="schoolfood.Fix" %>
 <%@ page import="schoolfood.Lunch" %>
+<%@ page import="java.util.Vector" %>
+
+<%
+    if (session.getAttribute("session_id") != null) {
+%>
 
 <jsp:useBean id="foodDAO" class="schoolfood.SchoolFoodDAO"/>
 <%
-    Lunch lunchList = foodDAO.getTodayLunch();
-    Dinner dinnerList = foodDAO.getTodayDinner();
-    Fix fixList = foodDAO.getTodayFix();
-    Daily dailyList = foodDAO.getTodayDaily();
+    Vector<Lunch> lunchList = foodDAO.getLunch();
+    Vector<Dinner> dinnerList = foodDAO.getDinner();
+    Vector<Fix> fixList = foodDAO.getFix();
+    Vector<Daily> dailyList = foodDAO.getDaily();
 %>
 <jsp:include page="../top.jsp"/>
 
@@ -28,46 +33,68 @@
     <title>KBU BOOK</title>
 </head>
 <body>
-<table class="schoolfood">
-    <thead>
-    <tr>
-        <td>
-            <%=lunchList.getDate()%>
-            <br>
-            <%=lunchList.getDay()%>
-        </td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            <% for (String lunch : lunchList.getFood()) { %>
-            <%=lunch%><br>
+<% if (lunchList.isEmpty()) { // 디비에 없는 데이터를 불러오려 할 때 예외처리 %>
+<h1 class="text-center">아직 학식메뉴가 업데이트 되지 않았습니다.</h1>
+<%} else {%>
+<h1 class="text-center">이번주 학식</h1>
+<br>
+<div style="margin: 0 50px 0 50px">
+    <table class="schoolfood">
+        <thead>
+        <tr>
+            <% for (Lunch lunch : lunchList) { %>
+            <td>
+                <%=lunch.getDate()%><br>
+                <%=lunch.getDay()%>
+            </td>
             <%}%>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <% for (String dinner : dinnerList.getFood()) { %>
-            <%=dinner%><br>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <% for (Lunch lunch : lunchList) { %>
+            <td>
+                <%for (String food : lunch.getFood()) {%>
+                <%=food%><br>
+                <%}%>
+            </td>
             <%}%>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <% for (String fix : fixList.getFood()) { %>
-            <%=fix%><br>
+        </tr>
+        <tr>
+            <% for (Dinner dinner : dinnerList) { %>
+            <td>
+                <%for (String food : dinner.getFood()) {%>
+                <%=food%><br>
+                <%}%>
+            </td>
             <%}%>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <%=dailyList.getFood()%><br>
-        </td>
-    </tr>
-    </tbody>
-</table>
+        </tr>
+        <tr>
+            <% for (Fix fix : fixList) { %>
+            <td>
+                <%for (String food : fix.getFood()) {%>
+                <%=food%><br>
+                <%}%>
+            </td>
+            <%}%>
+        </tr>
+        <tr>
+            <% for (Daily daily : dailyList) { %>
+            <td>
+                <%=daily.getFood()%><br>
+            </td>
+            <%}%>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<%}%>
 <br>
 <jsp:include page="../footer.jsp"/>
 </body>
 </html>
+<%
+    } else {
+        out.print("<script>alert('로그인을 해주세요.'); location.href='../index.jsp';</script>");
+    }
+%>

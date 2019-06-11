@@ -1,6 +1,5 @@
 package freetalk;
 
-
 import kbu.DBConnectionMgr;
 
 import java.sql.Connection;
@@ -220,7 +219,7 @@ public class FreeTalkDAO {
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, freetalk.getWriter());
             pstmt.setString(2, freetalk.getTitle());
-            pstmt.setString(3, freetalk.getContent());
+            pstmt.setString(3, freetalk.getContent().replace("/r/n", "<br>"));
             pstmt.setInt(4, freetalk.getId());
             pstmt.executeUpdate();
         } catch (Exception e) {
@@ -231,6 +230,99 @@ public class FreeTalkDAO {
         }
     }
 
+    // 댓글 작성
+    public void writeComment(int id, String writer, String content, String ip) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+        try {
+            con = pool.getConnection();
 
+            sql = "insert freetalk_comment(l_id, writer, content, date, ip) values(?, ?, ?, now(), ?)";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.setString(2, writer);
+            pstmt.setString(3, content.replace("/r/n", "<br>"));
+            pstmt.setString(4, ip);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+            if (con != null) try { con.close(); } catch(SQLException ex) {}
+        }
+    }
 
+    // 게시물 별 댓글 가져오기
+    public Vector<FreeTalkComment> getCommentList(int id) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+        Vector<FreeTalkComment> list = new Vector<FreeTalkComment>();
+
+        try {
+            con = pool.getConnection();
+
+            sql = "select * from freetalk_comment where l_id="+id+" order by l_id ";
+            pstmt = con.prepareStatement(sql);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                FreeTalkComment freeTalkComment = new FreeTalkComment();
+                freeTalkComment.setCid(rs.getInt("c_id"));
+                freeTalkComment.setWriter(rs.getString("writer"));
+                freeTalkComment.setContent(rs.getString("content"));
+                freeTalkComment.setDate(rs.getDate("date"));
+                freeTalkComment.setIp(rs.getString("ip"));
+                list.add(freeTalkComment);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {}
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException ex) {}
+
+            }
+
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {}
+            }
+        }
+
+        return list;
+    }
+
+    // 댓글 삭제
+    public void deleteComment(int num) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        try {
+            con = pool.getConnection();
+            sql = "delete from freetalk_comment where c_id=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, num);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+            if (con != null) try { con.close(); } catch(SQLException ex) {}
+        }
+    }
 }

@@ -10,6 +10,5 @@
 
 <%
     session.invalidate(); // 세션 무효
-
     out.print("<script>alert('로그아웃 되었습니다.'); location.href='../index.jsp';</script>"); // alert 출력
 %>
