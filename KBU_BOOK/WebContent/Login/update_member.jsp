@@ -13,10 +13,13 @@
         background-color: rgba(69, 255, 57, 0.06);
     }
 </style>
-
 <%@ page import="kbu.Member"%>
+<%@page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <jsp:useBean id="MemberDAO" class="kbu.MemberDAO" />
-<% String id = (String)session.getAttribute("session_id");
+<%  Date time = new Date();
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+    String id = (String)session.getAttribute("session_id");
     Member mem = MemberDAO.getmember(id);
 if(id == null){
     %>
@@ -53,26 +56,32 @@ if(id == null){
         }
     }
 </script>
+<jsp:include page="../top.jsp"/>
+
 <html>
 <head>
     <title>KBUBook UserUpdate Page</title>
 </head>
 <body>
-<jsp:include page="../top.jsp"/>
-
 <div align="center">
     <form name="rejoin" method="post" action="update.jsp" onsubmit="">
-    <p> 회원정보 수정 페이지</p>
-        <p> 학번:<b><%=mem.getStd_id()%></b> </p>
-        <p> 회원가입 날짜:<b><%= mem.getJoin_date()%></b></p>
-        <p> 아이디: <b><%=id%></b> </p>
-    <p>학교 이메일: <input type="email" name="email" value="<%=mem.getEmail()%>" class="text-form" readonly> </p>
-        <p><br> <b>회원정보 수정은 비밀번호, 휴대전화번호만 가능 하며 더이상 사용하지 않을경우 회원탈퇴 할 수 있습니다.</b> </p>
-    <p> 비밀번호: <input type="password" name="pwd" value="<%=mem.getPwd()%>" class="text-form" required > <input type="hidden" value="<%=mem.getPwd()%>" name="now_pwd"> </p>
-    <p> 휴대전화 번호: <input type="tel" name="tel" value="<%=mem.getTel()%>" class="text-form" required> </p>
-    <p><input type="submit" name="re_join" value="정보수정" onclick="check(this.form)" class="btn btn-primary" > <input type="button" name="del_member" value="회원탈퇴" onclick="delmember(this.rejoin)" class="btn btn-danger"> </p>
-    </form>
-</div>
+        <table border="3" style="background: rgba(178,243,223,0.53)">
+            <tr><td align="center" colspan="2" style="width: 600px; font-size: 20px"><b>회원정보 수정</b></td></tr>
 
+            <tbody>
+            <tr><td align="center" style="width:auto; height: 30px">학번</td> <td><b>&nbsp;<%=mem.getStd_id()%></b></td> </tr>
+            <tr><td align="center" style="height: 30px">회원가입 날짜</td> <td><b>&nbsp;<%= mem.getJoin_date()%></b></td></tr>
+            <tr><td align="center" style="height: 30px">ID</td> <td><b>&nbsp;<%=id%></b></td></tr>
+            <tr><td align="center" style="height: 30px">학교이메일</td><td><b>&nbsp;<%=mem.getEmail()%></b></td> </tr>
+            <tr><td align="center" colspan="2" style="width: auto; height: auto"><b>회원정보 수정은 비밀번호, 휴대전화번호만 가능하며, 회원탈퇴도 할 수 있습니다!</b></td> </tr>
+            <tr><td align="center" style="height: 30px">비밀번호</td><td>&nbsp;<input type="password" name="pwd" value="<%=mem.getPwd()%>" class="text-form" size="50" required > <input type="hidden" value="<%=mem.getPwd()%>" name="now_pwd"></td> </tr>
+            <tr><td align="center" style="height: 30px">휴대전화 번호</td><td>&nbsp;<input type="tel" name="tel" value="<%=mem.getTel()%>" class="text-form" maxlength="11" size="50" required></td> </tr>
+            </tbody>
+            <tr><td align="center" colspan="2" style="height: 80px;"><input type="submit" name="re_join" value="정보수정" onclick="check(this.form)" class="btn btn-primary" >&nbsp;&nbsp;<input type="button" name="del_member" value="회원탈퇴" onclick="delmember(this.rejoin)" class="btn btn-danger"></td></tr>
+        </table>
+    </form>
+    [마지막으로 회원정보 수정한 시간: <b><%=formatter.format(session.getLastAccessedTime())%></b>]
+</div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
