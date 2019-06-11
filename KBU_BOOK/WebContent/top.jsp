@@ -46,7 +46,19 @@
                 </ul>
             </li>
             <li><a href="#">묵상지</a></li>
+            <%
+                if (session.getAttribute("session_id").equals("wellsfarm")) {
+            %>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">영양사 전용<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="../SchoolFood/schoolFood.jsp">식단표</a></li>
+                    <li><a href="../SchoolFood/upload.jsp">식단표 업로드</a></li>
+                </ul>
+            </li>
+            <%} else {%>
             <li><a href="../SchoolFood/schoolFood.jsp">식단표</a></li>
+            <% } %>
         </ul> <!--식단표 메뉴까지 -->
 
         <ul class="nav navbar-nav navbar-right">
