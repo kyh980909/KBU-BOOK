@@ -86,6 +86,15 @@
             document.readFrm.nowPage.value = page;
             document.readFrm.submit();
         }
+
+        function check() {
+            if (document.searchFrm.keyWord.value == "") {
+                alert("검색어를 입력하세요.");
+                document.searchFrm.keyWord.focus();
+                return;
+            }
+            document.searchFrm.submit();
+        }
     </script>
 </head>
 <body>
@@ -182,6 +191,22 @@
         <%}%>
     </div>
 </div>
+<form name="searchFrm" method="get" action="../FreeTalk/freeTalk.jsp">
+    <table style="cellpadding:4; cellspacing:0" align="center">
+        <tr>
+            <td>
+                <select name="keyField" size="1">
+                    <option value="writer"> 이 름</option>
+                    <option value="title"> 제 목</option>
+                    <option value="content"> 내 용</option>
+                </select>
+                <input size="16" name="keyWord">
+                <input type="button" value="찾기" onClick="javascript:check()"> <input type="hidden" name="nowPage"
+                                                                                     value="1">
+            </td>
+        </tr>
+    </table>
+</form>
 <form name="readFrm" method="get">
     <input type="hidden" name="num">
     <input type="hidden" name="nowPage" value="<%=nowPage%>">
