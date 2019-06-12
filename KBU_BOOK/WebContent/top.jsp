@@ -66,8 +66,10 @@
                     메뉴<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="../Login/logoutProc.jsp">로그아웃</a></li>
+                    <% if (!session.getAttribute("session_id").equals("wellsfarm")) { %>
                     <li class="divider"></li>
                     <li><a href="../Login/update_member.jsp">회원정보 수정</a></li>
+                    <%}%>
                 </ul>
             </li>
         </ul>

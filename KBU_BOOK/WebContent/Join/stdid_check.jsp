@@ -7,10 +7,7 @@
 --%>
 <%@page import="kbu.Student"%>
 <%@ page import="kbu.MemberDAO" %>
-<<<<<<< HEAD
 <%@ page import="kbu.Student" %>
-=======
->>>>>>> b9e40850794fe224f2e1709daeff84d203ee0c94
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="../css/bootstrap.min.css"><!--부트스트랩 css를 불러옴-->
 <style>
@@ -42,13 +39,10 @@
         } else{ %>
 
     <p>이름:<b><%=student.getName()%></b></p>
-<<<<<<< HEAD
     <p>학년: <b><%=student.getGrade()%></b>학년 </p>
     <p>학과: <b><%=student.getDepartment()%>과</b> </p></span>
-=======
     <p>학년: <b><%=student.getGrade()%></b>학년</p>
     <p>학과: <b><%=student.getDepartment()%>과</b></p></span>
->>>>>>> b9e40850794fe224f2e1709daeff84d203ee0c94
     <p><input type="button" value="확인" name="exit" onclick="window.close()" class="btn btn-info"></p>
 <% } %>
 </div>
