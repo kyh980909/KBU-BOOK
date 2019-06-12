@@ -2,22 +2,22 @@
   Created by IntelliJ IDEA.
   User: HWJ
   Date: 2019-05-26
-  Time: ¿ÀÈÄ 5:56
+  Time: ì˜¤í›„ 5:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=EUC-KR" language="java" pageEncoding="EUC-KR" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
-<% request.setCharacterEncoding("EUC-KR");%>
+<% request.setCharacterEncoding("UTF-8");%>
 <style>
     @import "../css/style.css";
 </style>
 <%
-    String std_id = request.getParameter("std_id"); /*ÇĞ¹ø*/
-    String id = request.getParameter("id"); /*¾ÆÀÌµğ*/
-    String pwd= request.getParameter("pwd"); /*ºñ¹Ğ¹øÈ£*/
-    String email = request.getParameter("email"); /*ÇĞ±³ÀÌ¸ŞÀÏ*/
-    String email2 = request.getParameter("email2"); /*ÇĞ±³ÀÌ¸á2*/
-    String tel = request.getParameter("phone_num"); /*ÀüÈ­¹øÈ£*/
+    String std_id = request.getParameter("std_id"); /*í•™ë²ˆ*/
+    String id = request.getParameter("id"); /*ì•„ì´ë””*/
+    String pwd= request.getParameter("pwd"); /*ë¹„ë°€ë²ˆí˜¸*/
+    String email = request.getParameter("email"); /*í•™êµì´ë©”ì¼*/
+    String email2 = request.getParameter("email2"); /*í•™êµì´ë©œ2*/
+    String tel = request.getParameter("phone_num"); /*ì „í™”ë²ˆí˜¸*/
 
     Connection conn=null;
     PreparedStatement pstmt=null;
@@ -35,12 +35,12 @@
         pstmt.setString(4, email+"@"+email2);
         pstmt.setString(5, tel);
         pstmt.executeUpdate();
-        out.println("ÃàÇÏÇÕ´Ï´Ù! È¸¿ø°¡ÀÔ ¼º°ø ÀÔ´Ï´Ù! \n 2ÃÊÈÄ ¸ŞÀÎÈ¨ÆäÀÌÁö·Î ÀÚµ¿ÀÌµ¿ ÇÕ´Ï´Ù."); %>
+        out.println("ì¶•í•˜í•©ë‹ˆë‹¤! íšŒì›ê°€ì… ì„±ê³µ ì…ë‹ˆë‹¤! \n 2ì´ˆí›„ ë©”ì¸í™ˆí˜ì´ì§€ë¡œ ìë™ì´ë™ í•©ë‹ˆë‹¤."); %>
 <hr class="hr"> <input type="button" value="Home" onClick="location.href='../index.jsp'">
-<meta http-equiv="refresh" content="2; URL=../index.jsp"> <!--2ÃÊÈÄ ¸ŞÀÎÈ¨ÆäÀÌÁö·Î ÀÌµ¿-->
+<meta http-equiv="refresh" content="2; URL=../index.jsp"> <!--2ì´ˆí›„ ë©”ì¸í™ˆí˜ì´ì§€ë¡œ ì´ë™-->
 </hr>
   <%  }catch(Exception e){
-    out.println("È¸¿ø°¡ÀÔ¿¡ ½ÇÆĞ Çß½À´Ï´Ù. ¿¡·¯: "+e);%>
+    out.println("íšŒì›ê°€ì…ì— ì‹¤íŒ¨ í–ˆìŠµë‹ˆë‹¤. ì—ëŸ¬: "+e);%>
 <hr class="hr"> <input type="button" value="Back" onClick="history.back()"> </hr>
 <%
     }finally{ if(pstmt != null) try{pstmt.close();
@@ -50,6 +50,5 @@
     <title>KbuBook_Signup</title>
 </head>
 <body>
-<h1> È¸¿ø°¡ÀÔ ÆäÀÌÁö Å×½ºÆ® Áß</h1>
 </body>
 </html>
