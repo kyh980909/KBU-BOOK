@@ -78,7 +78,7 @@
             </tr>
             <tr>
                 <td align="center" style="height: 30px">회원가입 날짜</td>
-                <td><b>&nbsp;<%=mem.getJoin_date()%>
+                <td><b>&nbsp;<%=formatter.format(mem.getJoin_date())%>
                 </b></td>
             </tr>
             <tr>
