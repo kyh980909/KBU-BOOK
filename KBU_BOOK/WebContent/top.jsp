@@ -45,7 +45,7 @@
                     <li><a href="#">성서학과</a></li>
                 </ul>
             </li>
-            <li><a href="#">묵상지</a></li>
+            <li><a href="../quiet_time/list.jsp">묵상지</a></li>
             <%
                 if (session.getAttribute("session_id").equals("wellsfarm")) {
             %>
