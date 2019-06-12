@@ -12,7 +12,7 @@
 
 <%  String std_id = request.getParameter("std_id");
     String email = request.getParameter("email");
-    kbu.MemberDAO dao = MemberDAO.getInstance();
+    kbu.MemberDAO dao = kbu.MemberDAO.getInstance();
     String ID = dao.se_id(std_id, email);
     %>
 <html>

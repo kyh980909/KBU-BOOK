@@ -18,24 +18,22 @@
     String email = request.getParameter("email"); /*학교이메일*/
     String email2 = request.getParameter("email2"); /*학교이멜2*/
     String tel = request.getParameter("phone_num"); /*전화번호*/
-    Timestamp join_date = new Timestamp(System.currentTimeMillis()); /*가입일*/
 
     Connection conn=null;
     PreparedStatement pstmt=null;
-    String str="";
+    String str = "";
     try{ String jdbcUrl="jdbc:mysql://210.119.129.186:33306/kbu_book?serverTimezone=UTC";
         String dbId="dev";
         String dbPass="151517";
         Class.forName("com.mysql.jdbc.Driver");
-        conn=DriverManager.getConnection(jdbcUrl,dbId ,dbPass );
-        String sql= "insert into  member(std_id, id, pwd, email, tel, join_date) values (?,?,?,?,?,?)";
+        conn=DriverManager.getConnection(jdbcUrl,dbId ,dbPass);
+        String sql= "insert into member(std_id, id, pwd, email, tel, join_date) values (?,?,?,?,?,now())";
         pstmt=conn.prepareStatement(sql);
         pstmt.setString(1,std_id);
         pstmt.setString(2,id);
         pstmt.setString(3, pwd);
         pstmt.setString(4, email+"@"+email2);
         pstmt.setString(5, tel);
-        pstmt.setTimestamp(6, join_date);
         pstmt.executeUpdate();
         out.println("축하합니다! 회원가입 성공 입니다! \n 2초후 메인홈페이지로 자동이동 합니다."); %>
 <hr class="hr"> <input type="button" value="Home" onClick="location.href='../index.jsp'">

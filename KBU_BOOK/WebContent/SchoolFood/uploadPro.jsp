@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: yongho
+  Date: 2019-06-10
+  Time: 09:49
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%@ page import="java.io.File" %>
@@ -13,13 +20,6 @@
 <%@ page import="java.io.FileInputStream" %>
 <%@ page import="java.util.Vector" %>
 <%@ page import="schoolfood.*" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: yongho
-  Date: 2019-06-10
-  Time: 09:49
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

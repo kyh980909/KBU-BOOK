@@ -70,7 +70,7 @@
         </tbody>
         <tfoot class="view-table view-table-bordered">
         <tr>
-            <td style="padding: 10px;"><%=freeTalk.getContent()%>
+            <td style="padding: 10px;"><%=freeTalk.getContent().replace("\r\n", "<br>")%>
             </td>
         </tr>
         </tfoot>
@@ -89,12 +89,12 @@
                 <div>
                     <div class="cmt-writer-box"><%=ftk.getWriter()%>
                     </div>
-                    <div class="cmt-content-box"><%=ftk.getContent().replace("/r/n", "<br>")%>
+                    <div class="cmt-content-box"><%=ftk.getContent().replace("\r\n", "<br>")%>
                     </div>
                     <div class="pull-right">
                         <div class="pull-left"><%=ftk.getDate()%>
                         </div>
-                        <% if (ftk.getWriter().equals(userId)) {%>
+                        <% if (ftk.getWriter().equals(userId) || userId.equals("admin")) {%>
                         <div class="pull-right">&nbsp;<input class="delete-bt" type="submit" value="X">
                             <input type="hidden" name="c_id" value="<%=ftk.getCid()%>">
                         </div>
@@ -136,8 +136,8 @@
     <br>
     <div class="pull-right">
         <a href="freeTalk.jsp" class="btn btn-success">글목록</a>
-        <% if (freeTalk.getWriter().equals(userId)) { // 작성자와 로그인 한사람이 같을 경우 글수정, 글삭제 버튼 보이게 하기 %>
         <a href="update.jsp?id=<%=num%>" class="btn btn-primary">글수정</a>
+        <% if (freeTalk.getWriter().equals(userId) || userId.equals("admin")) { // 작성자와 로그인 한사람이 같을 경우 글수정, 글삭제 버튼 보이게 하기 %>
         <a href="delete.jsp?id=<%=num%>" class="btn btn-danger" onclick="return confirm('글을 삭제하시겠습니까?')">글삭제</a>
         <%}%>
     </div>
