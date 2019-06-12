@@ -25,7 +25,7 @@ String email1=request.getParameter("email");
     <title>KBUBook Email Check</title>
 </head>
 <body onload="document.email_check.emailbox.focus();">
-<form method="post" action="" name="email_check">
+<form method="post" name="email_check">
     <div align="center">
         <serach>학교 이메일 인증</serach>
         <hr></hr>
