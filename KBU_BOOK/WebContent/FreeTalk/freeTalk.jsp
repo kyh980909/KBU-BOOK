@@ -106,6 +106,18 @@
             </td>
         </tr>
     </table>
+    <div class="pull-right">
+    <form name="searchFrm" method="get" action="../FreeTalk/freeTalk.jsp">
+        <select name="keyField" size="1">
+            <option value="writer"> 이 름</option>
+            <option value="title"> 제 목</option>
+            <option value="content"> 내 용</option>
+        </select>
+        <input size="16" name="keyWord">
+        <input style="width: 18px;" type="image" src="../img/search.png" onclick="return check()">
+        <input type="hidden" name="nowPage" value="1">
+    </form>
+    </div>
     <%
         list = freetalk.getList(keyField, keyWord, start, end);  // DB 에서 글 목록을 받아서 리스트에 저장
         listSize = list.size(); // 리스트에 길이를 저장
@@ -157,7 +169,10 @@
         </tbody>
     </table>
     <%}%>
-    <a href="write.jsp" class="btn btn-success pull-right">글쓰기</a>
+    <div class="pull-right">
+    <a href="write.jsp" class="btn btn-success">글쓰기</a>
+    <a href="freeTalk.jsp" class="btn btn-primary">처음으로</a>
+    </div>
     <br>
     <div class="text-center">
         <%
@@ -191,22 +206,6 @@
         <%}%>
     </div>
 </div>
-<form name="searchFrm" method="get" action="../FreeTalk/freeTalk.jsp">
-    <table style="cellpadding:4; cellspacing:0" align="center">
-        <tr>
-            <td>
-                <select name="keyField" size="1">
-                    <option value="writer"> 이 름</option>
-                    <option value="title"> 제 목</option>
-                    <option value="content"> 내 용</option>
-                </select>
-                <input size="16" name="keyWord">
-                <input type="button" value="찾기" onClick="javascript:check()"> <input type="hidden" name="nowPage"
-                                                                                     value="1">
-            </td>
-        </tr>
-    </table>
-</form>
 <form name="readFrm" method="get">
     <input type="hidden" name="num">
     <input type="hidden" name="nowPage" value="<%=nowPage%>">

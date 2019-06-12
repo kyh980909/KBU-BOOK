@@ -82,33 +82,33 @@
     %>
     <!-- 게시판 댓글 시작 -->
     <form method="post" action="deleteComment.jsp">
-    <div class="comment-box">
-        <ul style="list-style: none; padding-top: 10px">
-            <%for (FreeTalkComment ftk : list) {%>
-            <li class="comment-wrap">
-                <div>
-                    <div class="cmt-writer-box"><%=ftk.getWriter()%>
-                    </div>
-                    <div class="cmt-content-box"><%=ftk.getContent().replace("\r\n", "<br>")%>
-                    </div>
-                    <div class="pull-right">
-                        <div class="pull-left"><%=ftk.getDate()%>
+        <div class="comment-box">
+            <ul style="list-style: none; padding-top: 10px">
+                <%for (FreeTalkComment ftk : list) {%>
+                <li class="comment-wrap">
+                    <div>
+                        <div class="cmt-writer-box"><%=ftk.getWriter()%>
                         </div>
-                        <% if (ftk.getWriter().equals(userId) || userId.equals("admin")) {%>
-                        <div class="pull-right">&nbsp;<input class="delete-bt" type="submit" value="X">
-                            <input type="hidden" name="c_id" value="<%=ftk.getCid()%>">
+                        <div class="cmt-content-box"><%=ftk.getContent().replace("\r\n", "<br>")%>
                         </div>
-                        <%} else {%>
-                        <div class="pull-right">&nbsp;<input class="hidden-bt" type="button" value="X"
-                                                             style="cursor: default;"></div>
-                        <%}%>
+                        <div class="pull-right">
+                            <div class="pull-left"><%=ftk.getDate()%>
+                            </div>
+                            <% if (ftk.getWriter().equals(userId) || userId.equals("admin")) {%>
+                            <div class="pull-right">&nbsp;<input class="delete-bt" type="submit" value="X">
+                                <input type="hidden" name="c_id" value="<%=ftk.getCid()%>">
+                            </div>
+                            <%} else {%>
+                            <div class="pull-right">&nbsp;<input class="hidden-bt" type="button" value="X"
+                                                                 style="cursor: default;"></div>
+                            <%}%>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <%}%>
-        </ul>
-    </div>
-    <%}%>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+        <%}%>
         <input type="hidden" name="l_id" value="<%=num%>">
     </form>
     <!-- 게시판 댓글 끝 -->
@@ -136,7 +136,9 @@
     <br>
     <div class="pull-right">
         <a href="freeTalk.jsp" class="btn btn-success">글목록</a>
+        <% if (freeTalk.getWriter().equals(userId)) {%>
         <a href="update.jsp?id=<%=num%>" class="btn btn-primary">글수정</a>
+        <%}%>
         <% if (freeTalk.getWriter().equals(userId) || userId.equals("admin")) { // 작성자와 로그인 한사람이 같을 경우 글수정, 글삭제 버튼 보이게 하기 %>
         <a href="delete.jsp?id=<%=num%>" class="btn btn-danger" onclick="return confirm('글을 삭제하시겠습니까?')">글삭제</a>
         <%}%>
