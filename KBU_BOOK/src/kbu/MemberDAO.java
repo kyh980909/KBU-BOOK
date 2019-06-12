@@ -5,6 +5,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.mail.Session;
 import java.util.Properties;
+import java.net.InetAddress;
 
 public class MemberDAO { //DB연결
     private DBConnectionMgr pool = null;
@@ -20,7 +21,10 @@ public class MemberDAO { //DB연결
     public MemberDAO() {
         try {
             pool = DBConnectionMgr.getInstance();
+            InetAddress ip = InetAddress.getLocalHost();
             System.out.println("DB연결 성공");
+            System.out.println("연결된 ip 주소: " + ip.getHostAddress());
+
         } catch (Exception e) {
             System.out.println("오류: " + e);
         }
@@ -200,6 +204,7 @@ public class MemberDAO { //DB연결
             String CODE = Email.code(); // 인증번호 위한 난수 발생부분
             String content = "인증번호는 [" + CODE + "] 입니다. <br> 인증번호를 정확히 입력해주십시오."; // 이메일 내용 설정
 
+
             // SMTP 이용하기 위해 설정해주는 설정값들
             try { //건들지 말것!
                 Properties props = new Properties();
@@ -227,6 +232,7 @@ public class MemberDAO { //DB연결
                 msg.setContent(content, "text/html; charset=utf-8"); // 내용설정 및 인코딩
                 Transport.send(msg); // 메일보내기
                 System.out.println("이메일 보내기 성공");
+
             } catch (MessagingException e) {
                 e.printStackTrace();
                 System.out.println("이메일 보내기 오류: " + e);
@@ -235,6 +241,7 @@ public class MemberDAO { //DB연결
                 e.printStackTrace();
             }
             return CODE;
+
         }
 
         public static String code() {   // 인증번호 난수 발생 메소드
@@ -245,6 +252,7 @@ public class MemberDAO { //DB연결
             }
             return buffer.toString();
         }
+
     }
 
     public Member getmember(String id) throws Exception { //회원정보 수정을 위하여 정보를 가져오는 메서드
@@ -338,6 +346,96 @@ public class MemberDAO { //DB연결
         }
         return del;
     }
+
+
+    public String temp_pwd(String email) throws Exception { //임시 비밀번호 메일 전송 메소드
+
+        String to1 = email; // 인증위해 사용자가 입력한 이메일주소
+        String host = "smtp.gmail.com"; // smtp 서버
+        String subject = "KBUBOOK 비밀번호 찾기"; // 보내는 제목 설정
+        String fromName = "KBUBOOK JOIN TEAM"; // 보내는 이름 설정
+        String from = "korlgg2@gmail.com"; // 보내는 사람(구글계정)
+        String CODE = temp(); // 인증번호 위한 난수 발생부분
+        String content = "임시 비밀번호는 [ " + CODE + " ] 입니다. <br> 로그인후 비밀번호를 변경해주십시오."; // 이메일 내용 설정
+
+
+        // SMTP 이용하기 위해 설정해주는 설정값들
+        try { //건들지 말것!
+            Properties props = new Properties();
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.transport.protocol", "smtp");
+            props.put("mail.smtp.host", host);
+            props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.port", "465");
+            props.put("mail.smtp.user", from);
+            props.put("mail.smtp.auth", "true");
+
+            Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication
+                            ("korlgg2@gmail.com", "kbubook!004"); // gmail계정
+                }
+            });
+
+            Message msg = new MimeMessage(mailSession);
+            InternetAddress[] address1 = {new InternetAddress(to1)}; //이메일 전송
+            msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
+            msg.setRecipients(Message.RecipientType.TO, address1); // 받는사람 설정
+            msg.setSubject(subject); // 제목설정
+            msg.setSentDate(new java.util.Date()); // 보내는 날짜 설정
+            msg.setContent(content, "text/html; charset=utf-8"); // 내용설정 및 인코딩
+            Transport.send(msg); // 메일보내기
+            System.out.println("임시 비번 이메일 보내기 성공");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.out.println("임시 비번 이메일 보내기 오류: " + e);
+        } catch (Exception e) {
+            System.out.println("임시 비번 이메일 보내기 오류2 " + e);
+            e.printStackTrace();
+        }
+        return CODE;
+
+    }
+
+    public static String temp() throws Exception {   // 임시비밀번호 난수 발생 메소드
+        char [] key= {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9','a', 'b', 'c', 'd', 'e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','!','@','#','$'};
+        StringBuffer tempKey = new StringBuffer();
+        for(int i = 0; i <= 7; i++) {
+            int num = (int) (key.length *Math.random());
+            tempKey.append(key[num]);
+            System.out.println("임시비밀번호 생성 완료");
+        }
+        return tempKey.toString();
+    }
+
+
+    public void temp_pwdchange(Member member) throws Exception { //임시 비밀번호 변경 메소드
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = pool.getConnection(); //커넥션 연결
+            pstmt = con.prepareStatement("update member set pwd = ? where id =?"); //DB에서 변경할 회원정보
+            pstmt.setString(1, member.getPwd());
+            pstmt.setString(2, member.getId());
+            pstmt.executeUpdate();
+            System.out.println("임시 비밀번호 변경 완료");
+        } catch (Exception e) {
+            System.out.println("임시 비밀번호 변경 오류: " + e);
+        } finally {
+            if (pstmt != null) try {
+                pstmt.close();
+            } catch (SQLException ex) {
+            }
+            if (con != null) try {
+                con.close();
+            } catch (SQLException ex) {
+            }
+        }
+
+    }
+
 
 }
 

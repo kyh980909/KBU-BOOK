@@ -37,6 +37,7 @@
 	nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock); //현재블럭 계산
 	totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock); //전체블럭계산
 %>
+<jsp:include page="../top.jsp"/>
 <html>
 <head>
 <title>JSP Board</title>

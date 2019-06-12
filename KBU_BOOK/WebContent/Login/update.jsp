@@ -14,6 +14,7 @@
     String id = (String)session.getAttribute("session_id");
     Member.setId(id);
 
+
     boolean result = MemberDAO.update_member(Member);
     String msg = "회원정보 업데이트 실패!";
     String url = "update_member.jsp";
