@@ -1,13 +1,13 @@
 package quiet_time;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Quiet_time_Comment {
 	private int idx;
 	private int board_idx;
 	private String name;
 	private String content;
-	private Timestamp reg_date;
+	private Date reg_date;
 	private String pass;
 
 	public int getIdx() {
@@ -42,11 +42,11 @@ public class Quiet_time_Comment {
 		this.content = content;
 	}
 
-	public Timestamp getReg_date() {
+	public Date getReg_date() {
 		return reg_date;
 	}
 
-	public void setReg_date(Timestamp reg_date) {
+	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
 

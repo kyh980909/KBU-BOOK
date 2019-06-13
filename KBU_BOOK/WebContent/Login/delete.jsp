@@ -10,19 +10,19 @@
 <jsp:useBean id="MemberDAO" class="kbu.MemberDAO"/>
 <jsp:useBean id="Member" class="kbu.Member"/>
 <%
-    String id = (String) session.getAttribute("session_id");
+    String id = (String)session.getAttribute("session_id");
     boolean result = MemberDAO.delete_member(id);
-    String msg = "회원탈퇴를 하지 못하였습니다!";
+    String msg ="회원탈퇴를 하지 못하였습니다!";
     String url = "update_member.jsp";
-    if (result == true) {
+    if(result==true) {
         session.invalidate();
         msg = "회원탈퇴가 되었습니다.";
-        url = "../index.jsp";
+        url ="../index.jsp";
     }
 %>
 <script>
     alert("<%=msg%>");
-    location.href = "<%=url%>"
+    location.href ="<%=url%>"
 </script>
 <html>
 <head>

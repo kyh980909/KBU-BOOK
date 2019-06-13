@@ -47,7 +47,9 @@
     </script>
 </head>
 <body>
-<h1 class="text-center">KBU BOOK</h1>
+<header class="text-center">
+    <h1><img src="../img/Logo.png" width="300"></h1>
+</header>
 <hr style="background: #dbdab8">
 <h3 class="text-center">게시글</h3><br>
 <div class="container" style="margin-bottom: 30px">

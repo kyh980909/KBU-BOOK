@@ -73,7 +73,13 @@ background-size: auto;
     function inputid_check() { // 아이디 입력창에 값 입력시 hidden에 idUncheck를 저장한다. 이렇게 하는 이유는 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때 다시 중복체크를 하기 위해서이다.
         document.form.idcheck.value="idUncheck";
     }
+    function check_tel(inputtel) {
+    if((inputtel.phone_num.value < "0" || inputtel.phone_num.value > "9") && (inputtel.phone_num.value == "+")){
+        alert("전화번호는 숫자, +(국가번호) 이외 입력할 수 없습니다.");
+        return false;
+    }
 
+}
  function studentid_checek(instdid) {
      if(instdid.std_id.value ==""){
          alert("학번을 입력하세요!");
@@ -129,7 +135,7 @@ background-size: auto;
 <p align="center">비밀번호: <input type="password" size="50" value="" minlength="4" placeholder="사용할 비밀번호를 정확히 입력하시오." name="pwd" class="text-form" onkeyup="check_pwd(this)" onchange="check_pwd(this)" required></p>
 <p align="center">학교이메일: <input type="text" name="email" class="text-form" required>@<select name="email2"> <option value="bible.ac.kr" selected>bible.ac.kr</option><option value="stu.bible.ac.kr">stu.bible.ac.kr</option></select> <input type="button" name="email_check" class="btn btn-primary" value="인증하기" onclick="email_c(this.form)">
     <input type="hidden" name="emailcheck" value="emUncheck"> </p>
-<p align="center">휴대전화번호: <input type="tel" name="phone_num" class="text-form" maxlength="11" required> </p>
+<p align="center">휴대전화번호: <input type="tel" name="phone_num" class="text-form" onchange="check_tel(this.form)" maxlength="11" required> </p>
 <p align="center"><input type="button" class="btn btn-success" value="Home" onClick="location.href='../index.jsp'"> <input type="reset" value="다시 쓰기" class="btn btn-success"> <input type="submit" value="회원가입" class="btn btn-success" > </p>
 
 <jsp:include page="../footer.jsp"/>

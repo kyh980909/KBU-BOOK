@@ -24,7 +24,8 @@
 	<p><input type="text" class="text-form" placeholder="학번 입력해라!" name="std_id" align="center" required> </p>
 	<p><input type="text" class="text-form" placeholder="학교 이메일 입력해라!" name="email" align="center" required> </p>
 	<p><input type="submit" value="아이디 찾기" name="search" class="btn btn-info"> <input type="button" value="닫기" name="exit" onclick="window.close()" class="btn btn-info"></p>
-	</div>
+	
+</div>
 </form>
 </body>
 </html>

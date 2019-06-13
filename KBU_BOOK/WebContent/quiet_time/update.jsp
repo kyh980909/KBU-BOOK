@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%@ page import="quiet_time.Quiet_time"%>
+
+<% if (session.getAttribute("session_id") != null) { %>
 <%
 int num = Integer.parseInt
 (request.getParameter("num"));
@@ -76,3 +78,6 @@ String content = bean.getContent();
 	</div>
 </body>
 </html>
+<%} else {
+	out.print("<script>alert('로그인을 해주세요.'); location.href='../index.jsp';</script>");
+}%>

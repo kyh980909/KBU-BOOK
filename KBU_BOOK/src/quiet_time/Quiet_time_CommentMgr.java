@@ -37,7 +37,7 @@ public class Quiet_time_CommentMgr {
 				bean.setIdx(rs.getInt("idx"));
 				bean.setName(rs.getString("Name"));
 				bean.setContent(rs.getString("content"));
-				bean.setReg_date(rs.getTimestamp("reg_date"));
+				bean.setReg_date(rs.getDate("reg_date"));
 				vlist.add(bean);
 			}
 		} catch (Exception e) {

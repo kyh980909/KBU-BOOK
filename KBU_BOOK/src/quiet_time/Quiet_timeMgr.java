@@ -21,7 +21,7 @@ public class Quiet_timeMgr {
             e.printStackTrace();
         }
     }
-// °Ô½ÃÆÇ ¸®½ºÆ®
+// ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public Vector<Quiet_time> getBoardList(String keyField, String keyWord, int start, int end) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -49,7 +49,7 @@ public class Quiet_timeMgr {
 				bean.setIdx(rs.getInt("idx"));
 				bean.setMem_name(rs.getString("mem_name"));
 				bean.setTitle(rs.getString("title"));
-				bean.setReg_date(rs.getTimestamp("reg_date"));
+				bean.setReg_date(rs.getDate("reg_date"));
 				bean.setCount(rs.getInt("count"));
 				vlist.add(bean);
 			}
@@ -75,7 +75,7 @@ public class Quiet_timeMgr {
 		return vlist;
 	}
 
-//ÃÑ °Ô½Ã¹°¼ö
+//ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½
 	public int getTotalCount(String keyField, String keyWord) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -118,7 +118,7 @@ public class Quiet_timeMgr {
 		return totalCount;
 	}
 
-//°Ô½Ã¹° ÀÔ·Â
+//ï¿½Ô½Ã¹ï¿½ ï¿½Ô·ï¿½
 	public void insertBoard(HttpServletRequest req) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -127,9 +127,6 @@ public class Quiet_timeMgr {
 		try {
 			con = pool.getConnection();
 			String content = req.getParameter("content");
-			if (req.getParameter("contentType").equalsIgnoreCase("TEXT")) {
-				content = UtilMgr.replace(content, "<", "&lt;");
-			}
 			sql = "insert quiet_time(mem_name,content,title,reg_date,pass,count,ip)";
 			sql += "values(?, ?, ?, now(), ?, 0, ?)";
 			pstmt = con.prepareStatement(sql);
@@ -160,7 +157,7 @@ public class Quiet_timeMgr {
 		}
 	}
 
-//°Ô½Ã¹° ¸®ÅÏ
+//ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public Quiet_time getBoard(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -178,7 +175,7 @@ public class Quiet_timeMgr {
 				bean.setMem_name(rs.getString("mem_name"));
 				bean.setTitle(rs.getString("title"));
 				bean.setContent(rs.getString("content"));
-				bean.setReg_date(rs.getTimestamp("reg_date"));
+				bean.setReg_date(rs.getDate("reg_date"));
 				bean.setPass(rs.getString("pass"));
 				bean.setCount(rs.getInt("count"));
 				bean.setIp(rs.getString("ip"));
@@ -205,7 +202,7 @@ public class Quiet_timeMgr {
 		return bean;
 	}
 
-//Á¶È¸¼ö Áõ°¡
+//ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void upCount(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -232,7 +229,7 @@ public class Quiet_timeMgr {
 		}
 	}
 
-//°Ô½Ã¹° »èÁ¦
+//ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleteBoard(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -265,7 +262,7 @@ public class Quiet_timeMgr {
 		}
 	}
 
-//°Ô½Ã¹° ¼öÁ¤
+//ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateBoard(Quiet_time bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

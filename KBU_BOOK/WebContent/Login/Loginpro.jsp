@@ -16,7 +16,7 @@
 
 <%
     // 로그인 화면에 입력된 아이디와 비밀번호를 가져온다
-    String id = request.getParameter("id");
+    String id= request.getParameter("id");
     String pwd = request.getParameter("pwd");
     // 로그인 결과에 따라서 해당 주소로 이동
     String url = "";
@@ -24,7 +24,7 @@
     if (id.equals("wellsfarm") && pwd.equals("wellsfarm")) {
         session.setAttribute("session_id", id);
         url = "../main.jsp";
-    } else if (id.equals("admin") && pwd.equals("admin")) {
+    } else if(id.equals("admin") && pwd.equals("admin")) {
         session.setAttribute("session_id", id);
         url = "../main.jsp";
     } else {

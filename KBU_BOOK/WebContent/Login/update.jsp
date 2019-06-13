@@ -11,22 +11,22 @@
 <jsp:useBean id="Member" class="kbu.Member"/>
 <jsp:setProperty name="Member" property="*"/>
 <%
-    String id = (String) session.getAttribute("session_id");
+    String id = (String)session.getAttribute("session_id");
     Member.setId(id);
 
 
     boolean result = MemberDAO.update_member(Member);
     String msg = "회원정보 업데이트 실패!";
     String url = "update_member.jsp";
-    if (result == false) {
+    if(result==false) {
         msg = "회원정보 업데이트 성공!";
-        url = "../index.jsp";
+        url ="../index.jsp";
     }
 
 %>
 <script>
     alert("<%=msg%>");
-    location.href = "<%=url%>"
+    location.href ="<%=url%>"
 </script>
 
 <html>

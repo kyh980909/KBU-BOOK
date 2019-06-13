@@ -42,6 +42,7 @@
     <table class="schoolfood">
         <thead>
         <tr>
+            <th style="background-color: white;"></th>
             <% for (Lunch lunch : lunchList) { %>
             <td>
                 <%=lunch.getDate()%><br>
@@ -52,6 +53,7 @@
         </thead>
         <tbody>
         <tr>
+            <th>중식</th>
             <% for (Lunch lunch : lunchList) { %>
             <td>
                 <%for (String food : lunch.getFood()) {%>
@@ -61,6 +63,7 @@
             <%}%>
         </tr>
         <tr>
+            <th>석식</th>
             <% for (Dinner dinner : dinnerList) { %>
             <td>
                 <%for (String food : dinner.getFood()) {%>
@@ -70,6 +73,7 @@
             <%}%>
         </tr>
         <tr>
+            <th>고정메뉴</th>
             <% for (Fix fix : fixList) { %>
             <td>
                 <%for (String food : fix.getFood()) {%>
@@ -79,6 +83,7 @@
             <%}%>
         </tr>
         <tr>
+            <th>데일리메뉴</th>
             <% for (Daily daily : dailyList) { %>
             <td>
                 <%=daily.getFood()%><br>

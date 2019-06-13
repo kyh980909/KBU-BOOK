@@ -4,5 +4,5 @@ pageEncoding="EUC-KR"%>
 <%
 request.setCharacterEncoding("EUC-KR");
 bMgr.insertBoard(request);
-response.sendRedirect("list.jsp");
+response.sendRedirect("../quiet_time/list.jsp");
 %>

@@ -5,6 +5,8 @@
 <head>
 <title>JSP Board</title>
 <link href="style.css" rel="stylesheet" type="text/css">
+
+	<%if (session.getAttribute("session_id") != null) { %>
 <%
 	request.setCharacterEncoding("EUC-KR");
 	String nowPage = request.getParameter("nowPage");
@@ -77,3 +79,6 @@
 	<%}%>
 </body>
 </html>
+<%} else {
+	out.print("<script>alert('로그인을 해주세요.'); location.href='../index.jsp';</script>");
+}%>

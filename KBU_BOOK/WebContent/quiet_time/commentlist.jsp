@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%@page import="java.util.Vector"%>
 <%@page import="quiet_time.Quiet_time_Comment"%>
-<%@page import="java.sql.Timestamp"%>
+<%@ page import="java.util.Date" %>
 <jsp:useBean id="rMgr" class="quiet_time.Quiet_time_CommentMgr" />
+
+<% if (session.getAttribute("session_id") != null ) {%>
 <%
 	request.setCharacterEncoding("EUC-KR");
 	int board_idx = Integer.parseInt(request.getParameter("num"));
@@ -14,7 +16,6 @@
 <title>JSP Board</title>
 </head>
 <body>
-	댓글목록
 	<div align="center">
 		<table style="width: 960; cellpadding: 3; align: center;">
 			<tr>
@@ -40,7 +41,7 @@
 									int reply_idx = bean.getIdx();
 									String name = bean.getName();
 									String content = bean.getContent();
-									Timestamp regdate = bean.getReg_date();
+									Date regdate = bean.getReg_date();
 						%>
 						<tr>
 							<td align="center"><%=i + 1%></td>
@@ -48,7 +49,7 @@
 							<td align="center"><%=name%></td>
 							<td align="center"><%=regdate%></td>
 							<td align="center"><a
-								href="delete_reply.jsp?nowPage=<%=nowPage%>&num=<%=board_idx%>&idx=<%=reply_idx%>">x</a>
+								href="../quiet_time/delete_comment.jsp?nowPage=<%=nowPage%>&num=<%=board_idx%>&idx=<%=reply_idx%>">x</a>
 						</tr>
 						<%
 } //for
@@ -62,3 +63,7 @@
 	</div>
 </body>
 </html>
+
+<%} else {
+	out.print("<script>alert('로그인을 해주세요.'); location.href='../index.jsp';</script>");
+}%>
