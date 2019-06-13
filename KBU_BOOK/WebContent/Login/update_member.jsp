@@ -19,8 +19,8 @@
 <%@page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <jsp:useBean id="MemberDAO" class="kbu.MemberDAO"/>
-<% Date time = new Date();
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+<%
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
     String id = (String) session.getAttribute("session_id");
     Member mem = MemberDAO.getmember(id);
     if (id == null) {
@@ -78,7 +78,7 @@
             </tr>
             <tr>
                 <td align="center" style="height: 30px">회원가입 날짜</td>
-                <td><b>&nbsp;<%=formatter.format(mem.getJoin_date())%>
+                <td><b>&nbsp;<%=mem.getJoin_date()%>
                 </b></td>
             </tr>
             <tr>

@@ -1,6 +1,6 @@
 package kbu;
 
-import java.sql.Timestamp;
+import java.sql.*;
 
 public class Member {
     private int IDX;
@@ -9,7 +9,7 @@ public class Member {
     private String pwd;
     private String email;
     private String tel;
-    private Timestamp join_date;
+    private Date join_date;
 
     public int getIDX() {
         return IDX;
@@ -59,11 +59,11 @@ public class Member {
         this.tel = tel;
     }
 
-    public Timestamp getJoin_date() {
+    public Date getJoin_date() {
         return join_date;
     }
 
-    public void setJoin_date(Timestamp join_date) {
+    public void setJoin_date(Date join_date) {
         this.join_date = join_date;
     }
 }

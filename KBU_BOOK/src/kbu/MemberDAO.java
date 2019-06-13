@@ -272,7 +272,7 @@ public class MemberDAO { //DB연결
                 member.setPwd(rs.getString("pwd"));
                 member.setEmail(rs.getString("email"));
                 member.setTel(rs.getString("tel"));
-                member.setJoin_date(rs.getTimestamp("join_date"));
+                member.setJoin_date(rs.getDate("join_date"));
             }
         } catch (Exception e) {
             System.out.println("회원정보 가져옴 오류: " + e);

@@ -35,16 +35,6 @@
             <li>
                 <a href="../FreeTalk/freeTalk.jsp">자유수다방</a>
             </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">학과별 게시판<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">컴퓨터소프트웨어학과</a></li>
-                    <li><a href="#">간호학과</a></li>
-                    <li><a href="#">사회복지학과</a></li>
-                    <li><a href="#">영유아보육학과</a></li>
-                    <li><a href="#">성서학과</a></li>
-                </ul>
-            </li>
             <li><a href="../quiet_time/list.jsp">묵상지</a></li>
             <%
                 if (session.getAttribute("session_id").equals("wellsfarm")) {
