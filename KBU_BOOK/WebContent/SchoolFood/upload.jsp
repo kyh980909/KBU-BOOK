@@ -7,7 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% if (session.getAttribute("session_id").equals("wellsfarm")) {%>
+<%
+
+    if (session.getAttribute("session_id") != null) {
+        String user_id = session.getAttribute("session_id").toString();
+        if (user_id.equals("wellsfarm")) {%>
 <html>
 <head>
     <link rel="stylesheet" href="../css/bootstrap.css">
@@ -18,14 +22,14 @@
             if (upload.file.value === "") {
                 alert("파일을 업로드해주세요.");
                 return false;
-            } else if(!checkFileType(upload.file.value)) {
+            } else if (!checkFileType(upload.file.value)) {
                 alert("엑셀파일만 업로드 해주세요.");
                 return false;
             }
             document.upload.submit();
         }
 
-        function checkFileType(filePath){
+        function checkFileType(filePath) {
             var fileLen = filePath.length;
             var fileFormat = filePath.substring(fileLen - 5);
             fileFormat = fileFormat.toLowerCase();
@@ -53,6 +57,11 @@
 <jsp:include page="../footer.jsp"/>
 </body>
 </html>
-<%} else {
-    out.print("<script>alert('영양사만 접근 가능합니다.'); history.back();</script>");
-}%>
+<%
+        } else {
+            out.print("<script>alert('영양사만 접근 가능합니다.'); history.back();</script>");
+        }
+    } else {
+        out.print("<script>alert('잘못된 접근입니다.'); history.back();</script>");
+    }
+%>
