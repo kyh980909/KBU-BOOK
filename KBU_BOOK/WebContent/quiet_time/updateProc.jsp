@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
 <%@page import="quiet_time.Quiet_time"%>
 <jsp:useBean id="bMgr" class="quiet_time.Quiet_timeMgr" />
 <%
-request.setCharacterEncoding("EUC-KR");
+request.setCharacterEncoding("UTF-8");
 Quiet_time bean = (Quiet_time) session.getAttribute("bean");
 String nowPage = request.getParameter("nowPage");
 Quiet_time upBean = new Quiet_time();
@@ -21,7 +21,7 @@ String url = "read.jsp?nowPage=" + nowPage + "&num=" + upBean.getIdx();
 response.sendRedirect(url);
 } else {
 out.println("<script>");
-out.println("alert('ÀÔ·ÂÇÏ½Å ºñ¹Ð¹øÈ£°¡ ¾Æ´Õ´Ï´Ù.');");
+out.println("alert('ìž…ë ¥í•˜ì‹  ë¹„ë°€ë²ˆí˜¸ê°€ ì•„ë‹™ë‹ˆë‹¤.');");
 out.println("history.back();");
 out.println("</script>");
 }

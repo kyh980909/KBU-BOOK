@@ -2,30 +2,31 @@
   Created by IntelliJ IDEA.
   User: HWJ
   Date: 2019-05-28
-  Time: ¿ÀÀü 1:26
+  Time: ì˜¤ì „ 1:26
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <jsp:useBean id="MemberDAO" class="kbu.MemberDAO" />
-<% request.setCharacterEncoding("EUC-KR");%>
+<% request.setCharacterEncoding("UTF-8");%>
 
 <%   String id = request.getParameter("id");
     boolean result = MemberDAO.checkId(id); %>
 <style>
     @import "../css/style.css";
 </style>
-<link rel="stylesheet" href="../css/bootstrap.min.css"><!--ºÎÆ®½ºÆ®·¦ css¸¦ ºÒ·¯¿È-->
+<link rel="stylesheet" href="../css/bootstrap.min.css"><!--ë¶€íŠ¸ìŠ¤íŠ¸ë© cssë¥¼ ë¶ˆëŸ¬ì˜´-->
 
 <script>
     function submit_id() {
-        opener.document.form.idcheck.value="check_id"; //¾ÆÀÌµğ Áßº¹ È®ÀÎ °á°ú¸¦ È¸¿ø°¡ÀÔ ÆäÀÌÁö¿¡ Àü´Ş ÇÔ.
-        opener.document.form.id.value="<%=id%>";// ÆË¾÷Ã¢À» ÅëÇØ ¾ÆÀÌµğ¸¦ ÀÔ·ÂÈÄ ÀÚµ¿À¸·Î È¸¿ø°¡ÀÔ ÆäÀÌÁö ¾ÆÀÌµğ Æû¿¡ ÀÔ·ÂµÊ.
+        opener.document.form.idcheck.value="check_id"; //ì•„ì´ë”” ì¤‘ë³µ í™•ì¸ ê²°ê³¼ë¥¼ íšŒì›ê°€ì… í˜ì´ì§€ì— ì „ë‹¬ í•¨.
+        opener.document.form.id.value="<%=id%>";// íŒì—…ì°½ì„ í†µí•´ ì•„ì´ë””ë¥¼ ì…ë ¥í›„ ìë™ìœ¼ë¡œ íšŒì›ê°€ì… í˜ì´ì§€ ì•„ì´ë”” í¼ì— ì…ë ¥ë¨.
         self.close();
     }
-    function checkid() { //id°ª È®ÀÎ
+    function checkid() { //idê°’ í™•ì¸
         var id = document.getElementById("uid").value;
         if ((id < "0" || id > "9") && (id < "A" || id > "Z") && (id < "a" || id > "z")) {
-            alert("¾ÆÀÌµğ´Â ÇÑ±Û ¹× Æ¯¼ö¹®ÀÚ´Â »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù!\n ´Ù½Ã È®ÀÎÈÄ ÀÔ·ÂÀ» ÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù!!");
+            alert("ì•„ì´ë””ëŠ” í•œê¸€ ë° íŠ¹ìˆ˜ë¬¸ìëŠ” ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤!\n ë‹¤ì‹œ í™•ì¸í›„ ì…ë ¥ì„ í•´ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤!!");
+            return false;
             location.reload();
         }
 
@@ -40,14 +41,14 @@
 <div align="center">
     <br/><id><%=id%></id>
     <% if(result){
-        out.println("´Â ÀÌ¹Ì »ç¿ëÁßÀÎ ¾ÆÀÌµğ ÀÔ´Ï´Ù.<p/> »õ·Î¿î ¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä! <p/>"); %>
+        out.println("ëŠ” ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë”” ì…ë‹ˆë‹¤.<p/> ìƒˆë¡œìš´ ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”! <p/>"); %>
 
     <form name="check" method="post" action="id_check.jsp">
-        <input type="text" size="50" value="" placeholder="Áßº¹È®ÀÎ ÇØÁÖ¼À." name="id" class="text-form" id="uid" required> <input type="submit" value="Áßº¹È®ÀÎ" onclick="checkid(this.check)" class="btn btn-warning">
+        <input type="text" size="50" value="" placeholder="ì¤‘ë³µí™•ì¸ í•´ì£¼ì…ˆ." name="id" class="text-form" id="uid" required> <input type="submit" value="ì¤‘ë³µí™•ì¸" onclick="return checkid(this.check)" class="btn btn-warning">
     </form>
       <%  }else {
-            out.println("´Â »ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğ ÀÔ´Ï´Ù!<p/>"); %>
-    <input type="button" value="ID»ç¿ëÇÏ±â!" onclick="submit_id()" class="btn btn-warning">
+            out.println("ëŠ” ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë”” ì…ë‹ˆë‹¤!<p/>"); %>
+    <input type="button" value="IDì‚¬ìš©í•˜ê¸°!" onclick="submit_id()" class="btn btn-warning">
     <%}%>
 
 </div>
