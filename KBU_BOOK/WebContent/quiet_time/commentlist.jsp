@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.Vector"%>
 <%@page import="quiet_time.Quiet_time_Comment"%>
 <%@ page import="java.util.Date" %>
@@ -6,7 +6,7 @@
 
 <% if (session.getAttribute("session_id") != null ) {%>
 <%
-	request.setCharacterEncoding("EUC-KR");
+	request.setCharacterEncoding("UTF-8");
 	int board_idx = Integer.parseInt(request.getParameter("num"));
 	int nowPage = Integer.parseInt(request.getParameter("nowPage"));
 	Vector<Quiet_time_Comment> vlist = null;
@@ -23,17 +23,17 @@
 					<%
 						vlist = rMgr.getReplyList(board_idx);
 						if (vlist.isEmpty()) {
-							out.println("´ñ±ÛÀÌ ¾ø½À´Ï´Ù.");
+							out.println("ëŒ“ê¸€ì´ ì—†ìŠµë‹ˆë‹¤.");
 						} else {
 					%>
 					<table border=1
 						style="width: 100%; cellpadding: 2; cellspacing: 0; align: center; border-collapse: collapse">
 						<tr align="center" bgcolor="#e9e9e9" height="120%">
-							<td width="5%">¹ø È£</td>
-							<td width="60%">³»¿ë</td>
-							<td width="15%">ÀÌ ¸§</td>
-							<td width="17%">³¯ Â¥</td>
-							<td width="3%">»èÁ¦</td>
+							<td width="5%">ë²ˆ í˜¸</td>
+							<td width="60%">ë‚´ìš©</td>
+							<td width="15%">ì´ ë¦„</td>
+							<td width="17%">ë‚  ì§œ</td>
+							<td width="3%">ì‚­ì œ</td>
 						</tr>
 						<%
 							for (int i = 0; i < vlist.size(); i++) {
@@ -65,5 +65,5 @@
 </html>
 
 <%} else {
-	out.print("<script>alert('·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.'); location.href='../index.jsp';</script>");
+	out.print("<script>alert('ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.'); location.href='../index.jsp';</script>");
 }%>

@@ -1,24 +1,24 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="quiet_time.Quiet_time" %>
 <%@page import="java.sql.Date" %>
 <jsp:useBean id="bMgr" class="quiet_time.Quiet_timeMgr"/>
 
 <% if (session.getAttribute("session_id") != null) {%>
 <%
-    request.setCharacterEncoding("EUC-KR");
+    request.setCharacterEncoding("UTF-8");
     int num = Integer.parseInt(request.getParameter("num"));
     String nowPage = request.getParameter("nowPage");
     String keyField = request.getParameter("keyField");
     String keyWord = request.getParameter("keyWord");
-    bMgr.upCount(num);//Á¶È¸¼ö Áõ°¡
-    Quiet_time bean = bMgr.getBoard(num);//°Ô½Ã¹° °¡Á®¿À±â
+    bMgr.upCount(num);//ì¡°íšŒìˆ˜ ì¦ê°€
+    Quiet_time bean = bMgr.getBoard(num);//ê²Œì‹œë¬¼ ê°€ì ¸ì˜¤ê¸°
     String name = bean.getMem_name();
     String title = bean.getTitle();
     Date reg_date = bean.getReg_date();
     String content = bean.getContent();
     String ip = bean.getIp();
     int count = bean.getCount();
-    session.setAttribute("bean", bean);//°Ô½Ã¹°À» ¼¼¼Ç¿¡ ÀúÀå
+    session.setAttribute("bean", bean);//ê²Œì‹œë¬¼ì„ ì„¸ì…˜ì— ì €ì¥
 %>
 <html>
 <head>
@@ -32,17 +32,17 @@
             var pass = document.getElementById("pass");
 
             if (name.value.trim() === "") {
-                alert("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä")
+                alert("ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”")
                 return false;
             }
 
             if (pass.value.trim() === "") {
-                alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä")
+                alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”")
                 return false;
             }
 
             if (comment.value.trim() === "") {
-                alert("´ñ±ÛÀ» ÀÛ¼ºÇÏ¼¼¿ä");
+                alert("ëŒ“ê¸€ì„ ì‘ì„±í•˜ì„¸ìš”");
                 return false;
             }
 
@@ -63,22 +63,22 @@
     <br/> <br/>
     <table style="width: 960px; cellpadding: 3;">
         <tr>
-            <td style="background-color: #e9e9e9; height: 30px;" align="center">¹¬»óÁö</td>
+            <td style="background-color: #e9e9e9; height: 30px;" align="center">ë¬µìƒì§€</td>
         </tr>
         <tr>
             <td colspan="2">
                 <table style="cellpadding: 3; cellspacing: 0; width: 100%">
                     <tr>
-                        <td align="center" bgcolor="#DDDDDD" width="10%">ÀÌ ¸§</td>
+                        <td align="center" bgcolor="#DDDDDD" width="10%">ì´ ë¦„</td>
                         <td><%=name%>
                         </td>
-                        <td align="center" bgcolor="#DDDDDD" width="10%">µî·Ï³¯Â¥</td>
+                        <td align="center" bgcolor="#DDDDDD" width="10%">ë“±ë¡ë‚ ì§œ</td>
                         <td><%=reg_date%>
                         </td>
 
                     </tr>
                     <tr>
-                        <td align="center" bgcolor="#DDDDDD">Á¦ ¸ñ</td>
+                        <td align="center" bgcolor="#DDDDDD">ì œ ëª©</td>
                         <td colspan="3"><%=title%>
                         </td>
                     </tr>
@@ -89,7 +89,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="right"><br>Á¶È¸¼ö <%=count%>
+                        <td colspan="4" align="right"><br>ì¡°íšŒìˆ˜ <%=count%>
 
                         </td>
                     </tr>
@@ -98,24 +98,24 @@
         </tr>
         <tr>
 
-            <!-- ´ñ±Û -->
+            <!-- ëŒ“ê¸€ -->
             <td>
                 <hr/>
                 <form action="commentProc.jsp" method="post" onsubmit="return commentCheck();">
                     <table style="width: 960px; cellpadding: 4; align: center">
                         <tr>
-                            <td width="20%">ÀÌ ¸§</td>
+                            <td width="20%">ì´ ë¦„</td>
                             <td width="30%"><input type="text" id="name" name="name" size="10"
                                                    maxlength="8"></td>
-                            <td width="20%">ºñ¹Ğ¹øÈ£</td>
+                            <td width="20%">ë¹„ë°€ë²ˆí˜¸</td>
                             <td width="30%"><input type="password" id="pass" name="pass"
                                                    size="50" maxlength="30"></td>
                         </tr>
                         <tr>
-                            <td width="20%">³» ¿ë</td>
+                            <td width="20%">ë‚´ ìš©</td>
                             <td colspan="3" width="50%"><textarea id="content" name="content"
                                                                   rows="3" cols="100" style="resize: none;"></textarea></td>
-                            <td width="30%"><input type="submit" value="Àü¼Û"></td>
+                            <td width="30%"><input type="submit" value="ì „ì†¡"></td>
                         </tr>
                     </table>
                     <input type="hidden" name="num" value="<%=num%>"> <input
@@ -138,13 +138,13 @@
             </td>
         </tr>
 
-        <!-- ´ñ±Û -->
+        <!-- ëŒ“ê¸€ -->
         <tr>
             <td align="center" colspan="2">
                 <br>
-                [ <a href="javascript:list()">¸®½ºÆ®</a> | <a
-                    href="update.jsp?nowPage=<%=nowPage%>&num=<%=num%>">¼ö Á¤</a> | <a
-                    href="delete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">»è Á¦</a> ]<br/>
+                [ <a href="javascript:list()">ë¦¬ìŠ¤íŠ¸</a> | <a
+                    href="update.jsp?nowPage=<%=nowPage%>&num=<%=num%>">ìˆ˜ ì •</a> | <a
+                    href="delete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">ì‚­ ì œ</a> ]<br/>
             </td>
         </tr>
     </table>
@@ -163,5 +163,5 @@
 </body>
 </html>
 <%} else {
-    out.print("<script>alert('·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.'); location.href='../index.jsp';</script>");
+    out.print("<script>alert('ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.'); location.href='../index.jsp';</script>");
 }%>

@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="EUC-KR"%>
 <jsp:useBean id="rMgr" class="quiet_time.Quiet_time_CommentMgr" />
 <%
-	request.setCharacterEncoding("EUC-KR");
+	request.setCharacterEncoding("UTF-8");
 	int board_idx = Integer.parseInt(request.getParameter("num"));
 	String nowPage = request.getParameter("nowPage");
 	String keyField = "";

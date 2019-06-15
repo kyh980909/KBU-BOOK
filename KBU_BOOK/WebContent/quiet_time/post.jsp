@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 <% if (session.getAttribute("session_id") != null) {%>
 <html>
 <head>
-    <title>¹¬»óÁö ÀÛ¼º</title>
+    <title>ë¬µìƒì§€ ì‘ì„±</title>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
     <script>
         function postCheck() {
@@ -13,19 +13,19 @@
             var pass = document.getElementById("pass");
 
             if (mem_name.value.trim() === "") {
-                alert("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä");
+                alert("ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”");
                 return false;
             }
             if (title.value.trim() === "") {
-                alert("Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+                alert("ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”");
                 return false;
             }
             if (content.value.trim() === "") {
-                alert("³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+                alert("ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”");
                 return false;
             }
             if (pass.value.trim() === "") {
-                alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+                alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”");
                 return false;
             }
             return true;
@@ -38,7 +38,7 @@
     <br/>
     <table style="width: 960; cellpadding: 3;">
         <tr>
-            <td bgcolor="e9e9e9" height="25" align="center">¹¬»óÁö ÀÛ¼º</td>
+            <td bgcolor="e9e9e9" height="25" align="center">ë¬µìƒì§€ ì‘ì„±</td>
         </tr>
     </table>
     <br/>
@@ -48,28 +48,28 @@
                 <td align=center>
                     <table style="width: 960; cellpadding: 3; align: center">
                         <tr>
-                            <td width="10%">¼º ¸í</td>
+                            <td width="10%">ì„± ëª…</td>
                             <td width="90%"><input id="mem_name" name="mem_name" size="10"
                                                    maxlength="8"></td>
                         </tr>
                         <tr>
-                            <td>Á¦ ¸ñ</td>
+                            <td>ì œ ëª©</td>
                             <td><input id="title" name="title" size="50" maxlength="30"></td>
                         </tr>
                         <tr>
-                            <td>³» ¿ë</td>
+                            <td>ë‚´ ìš©</td>
                             <td><textarea id="content" name="content" rows="10" cols="50"></textarea></td>
                         </tr>
                         <tr>
-                            <td>ºñ¹Ğ ¹øÈ£</td>
+                            <td>ë¹„ë°€ ë²ˆí˜¸</td>
                             <td><input type="password" id="pass" name="pass" size="15"
                                        maxlength="15"></td>
                         </tr>
 
                         <tr>
-                            <td colspan="2"><input type="submit" value="µî·Ï"> <input
-                                    type="reset" value="´Ù½Ã¾²±â"> <input type="button"
-                                                                      value="¸®½ºÆ®"
+                            <td colspan="2"><input type="submit" value="ë“±ë¡"> <input
+                                    type="reset" value="ë‹¤ì‹œì“°ê¸°"> <input type="button"
+                                                                      value="ë¦¬ìŠ¤íŠ¸"
                                                                       onClick="javascript:location.href='../quiet_time/list.jsp'">
                             </td>
                         </tr>
@@ -84,5 +84,5 @@
 </html>
 
 <%} else {
-    out.print("<script>alert('·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.'); location.href='../index.jsp';</script>");
+    out.print("<script>alert('ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.'); location.href='../index.jsp';</script>");
 }%>

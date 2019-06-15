@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="quiet_time.Quiet_time"%>
 
 <% if (session.getAttribute("session_id") != null) { %>
@@ -18,7 +18,7 @@ String content = bean.getContent();
 <script>
 	function check() {
 		if (document.updateFrm.pass.value == "") {
-			alert("¼öÁ¤À» À§ÇØ ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+			alert("ìˆ˜ì •ì„ ìœ„í•´ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 			document.updateFrm.pass.focus();
 			return false;
 		}
@@ -31,7 +31,7 @@ String content = bean.getContent();
 		<br /> <br />
 		<table style="width: 960; cellpadding: 3;">
 			<tr>
-				<td bgcolor="#e9e9e9" height="21" align="center">¼öÁ¤ÇÏ±â</td>
+				<td bgcolor="#e9e9e9" height="21" align="center">ìˆ˜ì •í•˜ê¸°</td>
 			</tr>
 		</table>
 		<form name="updateFrm" method="post" action="updateProc.jsp">
@@ -40,32 +40,32 @@ String content = bean.getContent();
 					<td>
 						<table>
 							<tr>
-								<td width="20%">¼º ¸í</td>
+								<td width="20%">ì„± ëª…</td>
 								<td width="80%"><input name="name" value="<%=name%>"
 									size="30" maxlength="20"></td>
 							</tr>
 							<tr>
-								<td>Á¦ ¸ñ</td>
+								<td>ì œ ëª©</td>
 								<td><input name="title" size="50" value="<%=subject%>"
 									maxlength="50"></td>
 							<tr>
-								<td>³» ¿ë</td>
+								<td>ë‚´ ìš©</td>
 								<td><textarea name="content" rows="10" cols="50"><%=content%></textarea>
 								</td>
 							</tr>
 							<tr>
-								<td>ºñ¹Ğ ¹øÈ£</td>
+								<td>ë¹„ë°€ ë²ˆí˜¸</td>
 								<td><input type="password" name="pass" size="15"
-									maxlength="15"><span style="color: red"> * ¼öÁ¤
-										½Ã¿¡´Â ºñ¹Ğ¹øÈ£°¡ ÇÊ¿äÇÕ´Ï´Ù.</span></td>
+									maxlength="15"><span style="color: red"> * ìˆ˜ì •
+										ì‹œì—ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ í•„ìš”í•©ë‹ˆë‹¤.</span></td>
 							</tr>
 							<tr>
 								<td colspan="2" height="5"><hr /></td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="button" value="¼öÁ¤¿Ï·á"
-									onClick="check()"> <input type="reset" value="´Ù½Ã¼öÁ¤">
-									<input type="button" value="µÚ·Î" onClick="history.go(-1)">
+								<td colspan="2"><input type="button" value="ìˆ˜ì •ì™„ë£Œ"
+									onClick="check()"> <input type="reset" value="ë‹¤ì‹œìˆ˜ì •">
+									<input type="button" value="ë’¤ë¡œ" onClick="history.go(-1)">
 								</td>
 							</tr>
 						</table>
@@ -79,5 +79,5 @@ String content = bean.getContent();
 </body>
 </html>
 <%} else {
-	out.print("<script>alert('·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.'); location.href='../index.jsp';</script>");
+	out.print("<script>alert('ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.'); location.href='../index.jsp';</script>");
 }%>

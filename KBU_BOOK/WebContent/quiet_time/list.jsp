@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="quiet_time.Quiet_time" %>
 <%@page import="java.util.Vector" %>
 <%@ page import="java.util.Date" %>
@@ -6,17 +6,17 @@
 
 <% if (session.getAttribute("session_id") != null) { %>
 <%
-    request.setCharacterEncoding("EUC-KR");
-    int totalRecord = 0; //ÀüÃ¼·¹ÄÚµå¼ö
-    int numPerPage = 10; // ÆäÀÌÁö´ç ·¹ÄÚµå ¼ö
-    int pagePerBlock = 15; //ºí·°´ç ÆäÀÌÁö¼ö
-    int totalPage = 0; //ÀüÃ¼ ÆäÀÌÁö ¼ö
-    int totalBlock = 0; //ÀüÃ¼ ºí·°¼ö
-    int nowPage = 1; // ÇöÀçÆäÀÌÁö
-    int nowBlock = 1; //ÇöÀçºí·°
-    int start = 0; //µğºñÀÇ select ½ÃÀÛ¹øÈ£
-    int end = 0; //½ÃÀÛ¹øÈ£·Î ºÎÅÍ °¡Á®¿Ã select °¹¼ö
-    int listSize = 0; //ÇöÀç ÀĞ¾î¿Â °Ô½Ã¹°ÀÇ ¼ö
+    request.setCharacterEncoding("UTF-8");
+    int totalRecord = 0; //ì „ì²´ë ˆì½”ë“œìˆ˜
+    int numPerPage = 10; // í˜ì´ì§€ë‹¹ ë ˆì½”ë“œ ìˆ˜
+    int pagePerBlock = 15; //ë¸”ëŸ­ë‹¹ í˜ì´ì§€ìˆ˜
+    int totalPage = 0; //ì „ì²´ í˜ì´ì§€ ìˆ˜
+    int totalBlock = 0; //ì „ì²´ ë¸”ëŸ­ìˆ˜
+    int nowPage = 1; // í˜„ì¬í˜ì´ì§€
+    int nowBlock = 1; //í˜„ì¬ë¸”ëŸ­
+    int start = 0; //ë””ë¹„ì˜ select ì‹œì‘ë²ˆí˜¸
+    int end = 0; //ì‹œì‘ë²ˆí˜¸ë¡œ ë¶€í„° ê°€ì ¸ì˜¬ select ê°¯ìˆ˜
+    int listSize = 0; //í˜„ì¬ ì½ì–´ì˜¨ ê²Œì‹œë¬¼ì˜ ìˆ˜
     String keyWord = "", keyField = "";
     Vector<Quiet_time> vlist = null;
     if (request.getParameter("keyWord") != null) {
@@ -35,9 +35,9 @@
     start = (nowPage * numPerPage) - numPerPage;
     end = numPerPage;
     totalRecord = bMgr.getTotalCount(keyField, keyWord);
-    totalPage = (int) Math.ceil((double) totalRecord / numPerPage); //ÀüÃ¼ÆäÀÌÁö¼ö
-    nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock); //ÇöÀçºí·° °è»ê
-    totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock); //ÀüÃ¼ºí·°°è»ê
+    totalPage = (int) Math.ceil((double) totalRecord / numPerPage); //ì „ì²´í˜ì´ì§€ìˆ˜
+    nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock); //í˜„ì¬ë¸”ëŸ­ ê³„ì‚°
+    totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock); //ì „ì²´ë¸”ëŸ­ê³„ì‚°
 %>
 <jsp:include page="../top.jsp"/>
 <html>
@@ -78,7 +78,7 @@
 
         function check() {
             if (document.searchFrm.keyWord.value == "") {
-                alert("°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+                alert("ê²€ìƒ‰ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
                 document.searchFrm.keyWord.focus();
                 return;
             }
@@ -98,9 +98,9 @@
     <div class="pull-right">
         <form name="searchFrm" method="get" action="../quiet_time/list.jsp">
             <select name="keyField" size="1">
-                <option value="mem_name"> ÀÌ ¸§</option>
-                <option value="title"> Á¦ ¸ñ</option>
-                <option value="content"> ³» ¿ë</option>
+                <option value="mem_name"> ì´ ë¦„</option>
+                <option value="title"> ì œ ëª©</option>
+                <option value="content"> ë‚´ ìš©</option>
             </select>
             <input size="16" name="keyWord">
             <input style="width: 18px;" type="image" src="../img/search.png" onclick="return check()">
@@ -109,9 +109,9 @@
     </div>
     <%
         vlist = bMgr.getBoardList(keyField, keyWord, start, end);
-        listSize = vlist.size();//ºê¶ó¿ìÀú È­¸é¿¡ º¸¿©Áú °Ô½Ã¹°°¹¼ö
+        listSize = vlist.size();//ë¸Œë¼ìš°ì € í™”ë©´ì— ë³´ì—¬ì§ˆ ê²Œì‹œë¬¼ê°¯ìˆ˜
         if (vlist.isEmpty()) {
-            out.println("µî·ÏµÈ °Ô½Ã¹°ÀÌ ¾ø½À´Ï´Ù.");
+            out.println("ë“±ë¡ëœ ê²Œì‹œë¬¼ì´ ì—†ìŠµë‹ˆë‹¤.");
         } else {
     %>
     <table class="table table-hover">
@@ -124,11 +124,11 @@
         </colgroup>
         <thead>
         <tr>
-            <td align="center">¹ø È£</td>
-            <td align="center">Á¦ ¸ñ</td>
-            <td align="center">ÀÌ ¸§</td>
-            <td align="center">³¯ Â¥</td>
-            <td align="center">Á¶È¸¼ö</td>
+            <td align="center">ë²ˆ í˜¸</td>
+            <td align="center">ì œ ëª©</td>
+            <td align="center">ì´ ë¦„</td>
+            <td align="center">ë‚  ì§œ</td>
+            <td align="center">ì¡°íšŒìˆ˜</td>
         </tr>
         </thead>
         <tbody>
@@ -163,15 +163,15 @@
     %>
     <div class="pull-right">
         <% if (session.getAttribute("session_id").equals("admin")) {%>
-        <a href="post.jsp" class="btn btn-success">±Û¾²±â</a>
+        <a href="post.jsp" class="btn btn-success">ê¸€ì“°ê¸°</a>
         <%}%>
-        <a href="list.jsp" class="btn btn-primary">Ã³À½À¸·Î</a>
+        <a href="list.jsp" class="btn btn-primary">ì²˜ìŒìœ¼ë¡œ</a>
     </div>
     <br>
     <div class="text-center">
         <%
-            int pageStart = (nowBlock - 1) * pagePerBlock + 1; //ÇÏ´Ü ÆäÀÌÁö ½ÃÀÛ¹øÈ£
-            int pageEnd = ((pageStart + pagePerBlock) <= totalPage) ? (pageStart + pagePerBlock) : totalPage + 1; //ÇÏ´Ü ÆäÀÌÁö ³¡¹øÈ£
+            int pageStart = (nowBlock - 1) * pagePerBlock + 1; //í•˜ë‹¨ í˜ì´ì§€ ì‹œì‘ë²ˆí˜¸
+            int pageEnd = ((pageStart + pagePerBlock) <= totalPage) ? (pageStart + pagePerBlock) : totalPage + 1; //í•˜ë‹¨ í˜ì´ì§€ ëë²ˆí˜¸
             if (totalPage != 0) {
                 if (nowBlock > 1) {%>
         <ul class="pagination">
@@ -214,5 +214,5 @@
 </html>
 
 <%} else {
-    out.print("<script>alert('·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.'); location.href='../index.jsp';</script>");
+    out.print("<script>alert('ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.'); location.href='../index.jsp';</script>");
 }%>
