@@ -27,7 +27,6 @@
         if ((id < "0" || id > "9") && (id < "A" || id > "Z") && (id < "a" || id > "z")) {
             alert("아이디는 한글 및 특수문자는 사용할 수 없습니다!\n 다시 확인후 입력을 해주시기 바랍니다!!");
             return false;
-            location.reload();
         }
 
     }
